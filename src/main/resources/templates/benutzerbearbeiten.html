@@ -25,12 +25,16 @@
             <tr>
                 <th>
                     <label for="mag">Mag</label><br>
-                    <input type="text" id="mag">
+                    <p th:text="'(max. ' + ${maxWunsch} +')'"></p><br>
+                    <input th:if="${maxWunsch} != ${#lists.size(benutzer.mag)}" type="text" name="mag">
+                    <p th:each="element : ${#lists.sort(benutzer.mag)}" th:text="${element}"></p> <!-- mit # bekommt Thymeleaf Zugriff auf Utility Objekte (vorfefinierte Helferklassen)-->
                 </th>
 
                 <th>
                     <label for="magNicht">Mag Nicht</label><br>
-                    <input type="text" id="magNicht">
+                    <p th:text="'(max. ' + ${maxWunsch} +')'"></p><br>
+                    <input th:if="${maxWunsch} != ${#lists.size(benutzer.magNicht)}" type="text" name="magNicht">
+                    <p th:each="element : ${#lists.sort(benutzer.magNicht)}" th:text="${element}"></p>
                 </th>
 
             </tr>
