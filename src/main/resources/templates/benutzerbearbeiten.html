@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
+<html>
+    <head>
+        <title>Benutzer anlegen</title>
+    </head>
+    <body>
+        <h1 th:text="'Benutzer ' + ${benutzerID} + ' bearbeiten'"></h1> <!-- mit ' ' kann Thymeleaf klar zwischen Strings und Variablen unterscheiden-->
+
+        <form th:action="@{/submit}" method="post">
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name" th:value="${benutzer.name}"><br>
+
+        <label for="eMail">E-Mail</label><br>
+        <input type="text" id="eMail" name="eMail" th:value="${benutzer.eMail}"><br>
+
+        <label for="passwort">Passwort</label><br>
+        <input type="text" id="passwort" name="passwort" th:value="${benutzer.passwort}"><br>
+
+        <label for="geburtstag">Geburtstag</label><br>
+        <input type="text" id="geburtstag" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
+
+        <table>
+            <tr>
+                <th>
+                    <label for="mag">Mag</label><br>
+                    <input type="text" id="mag">
+                </th>
+
+                <th>
+                    <label for="magNicht">Mag Nicht</label><br>
+                    <input type="text" id="magNicht">
+                </th>
+
+            </tr>
+        </table>
+        <button type="submit">OK</button>
+    </form>
+        
+    </body>
+
+</html>
