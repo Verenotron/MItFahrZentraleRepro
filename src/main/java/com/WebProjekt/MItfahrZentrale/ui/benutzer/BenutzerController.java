@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
@@ -26,15 +25,8 @@ public class BenutzerController {
     // }
 
     @PostMapping("/submit")
-    public String postBenutzerDaten(@ModelAttribute("benutzer") BenutzerFormular benutzerFormular, 
-                                    @RequestParam String name,
-                                    @RequestParam String eMail,
-                                    @RequestParam String passwort,
-                                    @RequestParam String geburtstag){
-        benutzerFormular.setName(name);
-        benutzerFormular.seteMail(eMail);
-        benutzerFormular.setPasswort(passwort);
-        benutzerFormular.setGeburtstag(geburtstag);
+    public String postBenutzerDaten(@ModelAttribute("benutzer") BenutzerFormular benutzerFormular //befüllt benutzerFormular automatisch. Keine explizite zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
+                                    ){
         return "benutzerbearbeiten";
     }
 

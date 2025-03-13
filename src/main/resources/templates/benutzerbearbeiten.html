@@ -10,16 +10,16 @@
 
         <form th:action="@{/submit}" method="post">
         <label for="name">Name</label><br>
-        <input type="text" id="name" name="name" th:value="${benutzer.name}"><br>
+        <input type="text" name="name" th:value="${benutzer.name}"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
 
         <label for="eMail">E-Mail</label><br>
-        <input type="text" id="eMail" name="eMail" th:value="${benutzer.eMail}"><br>
+        <input type="text" name="eMail" th:value="${benutzer.eMail}"><br>
 
         <label for="passwort">Passwort</label><br>
-        <input type="text" id="passwort" name="passwort" th:value="${benutzer.passwort}"><br>
+        <input type="text" name="passwort" th:value="${benutzer.passwort}"><br>
 
         <label for="geburtstag">Geburtstag</label><br>
-        <input type="text" id="geburtstag" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
+        <input type="text" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
 
         <table>
             <tr>
