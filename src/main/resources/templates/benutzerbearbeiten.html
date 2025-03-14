@@ -21,11 +21,13 @@
         <label for="eMail">E-Mail</label><br>
         <input type="text" name="eMail" th:value="${benutzer.eMail}" th:classappend="${#fields.hasErrors('benutzer.eMail')} ? 'error-border' : ''"><br>
         <div th:if="${#fields.hasErrors('benutzer.eMail')}" th:errors="*{benutzer.eMail}" class="error-text"></div>
+
         <label for="passwort">Passwort</label><br>
         <input type="text" name="passwort" th:value="${benutzer.passwort}"><br>
 
         <label for="geburtstag">Geburtstag</label><br>
-        <input type="date" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
+        <input type="date" name="geburtstag" th:value="${benutzer.geburtstag}" th:classappend="${#fields.hasErrors('benutzer.geburtstag')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzer.geburtstag')}" th:errors="*{benutzer.geburtstag}" class="error-text"></div>
 
         <table>
             <tr>
