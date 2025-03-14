@@ -4,22 +4,28 @@
 <html>
     <head>
         <title>Benutzer anlegen</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body>
         <h1 th:text="'Benutzer ' + ${benutzerID} + ' bearbeiten'"></h1> <!-- mit ' ' kann Thymeleaf klar zwischen Strings und Variablen unterscheiden-->
 
         <form th:action="@{/submit}" method="post">
+
         <label for="name">Name</label><br>
-        <input type="text" name="name" th:value="${benutzer.name}"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
-
+        <input type="text" name="name" th:value="${benutzer.name}" th:classappend="${#fields.hasErrors('benutzer.name')} ? 'error-border' : ''"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
+        <div th:if="${#fields.hasErrors('benutzer.name')}" th:errors="*{benutzer.name}" class="error-text"></div> <!-- Utility-Klasse #fields kann auf BindingResult Ergebnisse des RequestHandlers zurückgreifen.-->
+        <!-- th:errors zeigt Validierungsfehler(selbstdefinierte messages) für das Feld benutzer.name an. *{} verweist auf das aktuelle Objekt im Model attribut (hier benutzer). -->
+        <!-- class="error" ist ein CSS-Klassensektor. Manuelle ausgestaltung möglich mit .error-->
+        <!-- th:classappend fügt dem Input-feld eine CSS Klasse hinzu, wenn ein Fehler in benutzer.name vorliegt-->
+        
         <label for="eMail">E-Mail</label><br>
-        <input type="text" name="eMail" th:value="${benutzer.eMail}"><br>
-
+        <input type="text" name="eMail" th:value="${benutzer.eMail}" th:classappend="${#fields.hasErrors('benutzer.eMail')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzer.eMail')}" th:errors="*{benutzer.eMail}" class="error-text"></div>
         <label for="passwort">Passwort</label><br>
         <input type="text" name="passwort" th:value="${benutzer.passwort}"><br>
 
         <label for="geburtstag">Geburtstag</label><br>
-        <input type="text" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
+        <input type="date" name="geburtstag" th:value="${benutzer.geburtstag}"><br>
 
         <table>
             <tr>

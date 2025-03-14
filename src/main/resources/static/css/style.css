@@ -1,0 +1,12 @@
+/* CSS dateien müssen in Spring im resources-Ordner abgelegt werden */
+
+.error-text {
+    color : red;
+    font-size: 10pt;
+}
+
+.error-border{
+    border: 2px solid red;
+
+    background-color: #ffe6e6;
+}

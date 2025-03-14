@@ -1,15 +1,33 @@
 package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 public class BenutzerFormular {
+    @NotBlank
+    @Size(min=3, max=80, message="Name muss min. 3 und max. 80 Zeichen lang sein.")
     String name;
+    
+    @Size(min=5, max=80, message="EMail muss zwischen 5 und 80 Zeichen lang sein.")
+    @Email(message="Es mus ich um eine Email handeln.")
     String eMail;
     String passwort;
-    String geburtstag;
+    
+    @NotNull(message="Geburtstag muss existieren.")
+    @Past(message="Geburtstag muss in der Vergangenheit liegen.")
+    @DateTimeFormat(pattern="yyyy-MM-dd") // so kommt's vom HTML-date-Inputfeld herein
+    LocalDate geburtstag;
+    
     Set<String> mag = new HashSet<String>();
     Set<String> magNicht = new HashSet<String>();
 
@@ -31,10 +49,10 @@ public class BenutzerFormular {
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
-    public String getGeburtstag() {
+    public LocalDate getGeburtstag() {
         return geburtstag;
     }
-    public void setGeburtstag(String geburtstag) {
+    public void setGeburtstag(LocalDate geburtstag) {
         this.geburtstag = geburtstag;
     }
     public Set<String> getMag() {
