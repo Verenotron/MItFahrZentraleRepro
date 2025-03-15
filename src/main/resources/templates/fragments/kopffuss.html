@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Navigation und Fußzeile</title>
+</head>
+<body>
+    <header th:fragment="kopf">
+        <nav>
+            <a href="${sprache}'" th:text="#{sprachen} + ' : '">Benutzer</a>
+            Wollen sie <a th:href="@{?sprache=de}">Deutsch</a>
+            oder <a th:href="@{?sprache=nl}">Niederländisch</a>?
+        </nav>
+    </header>
+
+    <footer th:fragment="fuss">
+        <nav>
+            <a href="#" th:text="#{fuss.impressum}"></a>
+            <a href="#" th:text="#{fuss.kontakt}"></a>
+        </nav>
+    </footer>
+
+</body>
+</html>

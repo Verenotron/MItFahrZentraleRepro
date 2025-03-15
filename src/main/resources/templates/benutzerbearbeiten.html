@@ -13,6 +13,10 @@
         </p> -->
 
         <!-- # spricht .properties, $ spricht Model an-->
+
+        <header>
+            <div th:replace="fragments/kopffuss :: kopf"></div>
+        </header>
         
         <h1 th:text="#{benutzerformular.titel(${benutzerID})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
         
@@ -58,6 +62,9 @@
         <button type="submit">OK</button>
     </form>
         
+    <footer>
+        <div th:replace="fragments/kopffuss :: fuss"></div>
+    </footer>
     </body>
 
 </html>
