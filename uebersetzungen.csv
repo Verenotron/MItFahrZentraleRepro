@@ -1,0 +1,237 @@
+propertyname;de;en;nl
+sprachen;sprachen;language;taal
+
+#####################
+#  KOPF-/FUSSZEILE  #
+#####################
+
+kopf.benutzer;Benutzer;Users;Gebruikers
+kopf.touren;Touren;Tours;Toeren
+kopf.orte;Orte;Places;Plaatsen
+fuss.impressum;Impressum;imprint;afdruk
+fuss.kontakt;Kontakt;contact;contact
+
+#____________________________
+# [Kopf-/Fusszeile - ENDE]
+
+#####################
+# Benutzer-Formular #
+#####################
+
+# PAGE
+benutzerformular.titel;Benutzerprofil {0} bearbeiten;Edit user profile {0};Gebruikersprofiel {0} bewerken
+benutzerformular.titel.neu;Neues Benutzerprofil;New user profile;Nieuw gebruikersprofiel
+benutzerformular.action.create;Erstellen;create;Creëren
+benutzerformular.action.save;Speichern;save;Redden
+#####################
+
+# NAME
+benutzer.name;Name;name;naam
+# > FEHLER-MASSAGES < #
+fehler.benutzer.name.notnull;Bitte gibt deinen Namen an;Please enter your name;Voer uw naam in
+fehler.benutzer.name.size;Länge von {min} bis {max};Length from {min} to {max};Lengte van {min} tot {max}
+#######################
+
+# GEBURTSTAG
+benutzer.geburtstag;Geburtstag;date of birth;geboortedatum
+# > FEHLER-MASSAGES < #
+fehler.benutzer.geburtstag.notnull;Bitte angeben, sonst können wir dich nicht, an deinem Geburtstag nerven;Please specify, otherwise we won't be able to bother you on your birthday;Geef dit a.u.b. aan, anders kunnen wij u niet lastigvallen op uw verjaardag
+fehler.benutzer.geburtstag.past;Du kannst leider kein Account haben, wenn du noch flüssig bist!;Unfortunately, you can't have an account if you still have money!;Helaas kun je geen account hebben als je nog geld hebt!
+#######################
+
+# EMAIL
+benutzer.email;E-Mail;E-mail;E-mail
+# > FEHLER-MASSAGES < #
+fehler.benutzer.email.size;Muss dem Aufbau [...]@[...].[...] entsprechen!;Must correspond to the structure [...]@[...].[...]!;Moet overeenkomen met de structuur [...]@[...].[...]!
+fehler.benutzer.email.emailformat;Ernsthaft, ${validatedValue} soll eine Mailadresse sein?;Seriously, ${validatedValue} is supposed to be an email address?;Serieus, ${validatedValue} zou een e-mailadres moeten zijn?
+#######################
+
+# PASSWORT
+benutzer.passwort;Passwort;password;wachtwoord
+# > FEHLER-MASSAGES < #
+benutzer.passwort.ungesetzt;Passwort wurde noch nicht gesetzt;The password has not yet been set;Het wachtwoord is nog niet ingesteld
+gutespasswort.fehler;Das ist kein gutes Passwort;This is not a good password;Dit is geen goed wachtwoord
+fehler.benutzer.passwort.gutespasswort;Passwort mus 17 oder siebzehn beinhalten;Password must contain 17 or seventeen;Wachtwoord moet 17 of zeventien bevatten
+#######################
+
+# MAG
+benutzer.magich;Ich mag;I like;Ik hou van
+
+# MAG-NICHT
+benutzer.magichnicht;Ich mag nicht;I don't like;Ik hou niet van
+
+#_____________________
+# > PAGE-MESSAGES < #
+fehler.benutzer.notfound;Die suche nach dem Benutzer mit der ID={0} war leider erfolglos!;Unfortunately, the search for the user with ID={0} was unsuccessful!;Helaas is het zoeken naar de gebruiker met ID={0} mislukt!
+
+#____________________________
+# [Benutzer-Formular - ENDE]
+
+#####################
+#  Benutzer-Liste   #
+#####################
+
+# PAGE
+benutzerliste.neu;Neuer Benutzer;new user;nieuw gebruiker
+benutzerliste.titel;Benutzerliste;all users;alle gebruikers
+benutzerliste.empty;Ganz schön leer hier..., erfinde dir doch welche!;Better safe than sorry!;Wat je zelf doet, doe je het best!
+
+# EINTRAG
+benutzerliste.eintrag.bearbeiten;bearbeiten;edit;bewerken
+benutzerliste.eintrag.loeschen;löschen;delete;wissen
+
+#_________________________
+# [Benutzer-Liste - ENDE]
+
+#####################
+#       ORTE        #
+#####################
+
+# PAGE
+ortformular.titel;Ort {0} bearbeiten;Edit place {0};Plaats {0} bewerken
+ortformular.titel.neu;Neuen Ort anlegen;Add new place;Nieuwe plaats toevoegen
+ortformular.action.create;Erstellen;create;Creëren
+ortformular.action.save;Speichern;save;Redden
+ortformular.prefill.found;Sie haben keine Koordinaten eingegeben! Ort {0} haben wir aber für dich gefunden! Prüfen Sie die neuen Daten...;You have not entered any coordinates! But we found location {0} for you! Check the new data...;U heeft geen coördinaten ingevoerd! Maar we hebben locatie {0} voor je gevonden! Controleer de nieuwe gegevens...
+ortformular.prefill.notfound;Wir konnten kein Ort  $0 finden können! Prüfen Sie den Ortsnamen oder geben Sie die Koordinaten an;We couldn't find a $0 location! Check the place name or enter the coordinates;We konden geen $ 0-locatie vinden! Controleer de plaatsnaam of voer de coördinaten in
+#####################
+
+# NAME
+ort.name;Ortsname;location name;plaatsnaam
+# > FEHLER-MASSAGES < #
+fehler.ort.name.size;Nicht aussagekräftig genung!;Not meaningful enough!;Niet betekenisvol genoeg!
+#######################
+
+# GEO-BREITE
+ort.geobreite;Breite;latitude;breedtegraad
+# > FEHLER-MASSAGES < #
+fehler.ort.geobreite.notNull;Bitte angeben;Please specify;Geef dit a.u.b. aan
+fehler.ort.geobreite.min;Muss positiv sein;must be positive;moet positief zijn
+#######################
+
+# GEO-LAENGE
+ort.geolaenge;Länge;longitude;lengtegraad
+# > FEHLER-MASSAGES < #
+fehler.ort.geolaenge.notNull;Bitte angeben;Please specify;Geef dit a.u.b. aan
+fehler.ort.geolaenge.min;Muss positiv sein;must be positive;moet positief zijn
+#######################
+
+# LINK
+ort.link.karte;Karte;map;kaart
+
+#_______________
+# [Orte - ENDE]
+
+#####################
+#     Ortsliste     #
+#####################
+
+# PAGE
+ortsliste.titel;Orte;Places;Plaatsen
+ortsliste.eintrag.bearbeiten;bearbeiten;edit;bewerken
+ortsliste.eintrag.loeschen;löschen;delete;wissen
+ortsliste.empty;Keine Orte vorhanden!;No locations available!;Geen locaties beschikbaar!
+
+# HEADLINE-COLS
+ortsliste.colhead.name;Ortsname;location name;plaatsnaam
+ortsliste.colhead.geobreite;Breite;latitude;breedtegraad
+ortsliste.colhead.geolaenge;Länge;longitude;lengtegraad
+
+# EINTRAG
+ortsliste.eintrag.karte;Karte;map;kaartje
+ortsliste.neu;Neuer Ort;new place;nieuw plaats
+
+#____________________
+# [Ortsliste - ENDE]
+
+#####################
+#       Tour        #
+#####################
+
+# PAGE
+tourformular.titel;Tour {0} bearbeiten;Edit tour {0};Toer {0} bewerken
+tourformular.titel.neu;Neue Tour;New tour;Nieuwe toer
+tourformular.action.create;Erstellen;create;Creëren
+tourformular.action.save;Speichern;save;Redden
+#####################
+
+# ABFAHRTZEITPUNKT
+tour.abfahrdatetime;Abfahrtzeitpunkt;departure time;vertrektijd
+# > FEHLER-MASSAGES < #
+fehler.tour.abfahrtDateTime.notNull;Bitte auswählen...;Please select...;Selecteer alstublieft...
+fehler.tour.abfahrtDateTime.future;Datum darf nicht in der Vergangenheit liegen!;Date cannot be in the past!;Datum kan niet in het verleden liggen!
+#######################
+
+# PREIS
+tour.preis;Preis (EUR);price (EUR);prijs (EUR)
+# > FEHLER-MASSAGES < #
+fehler.tour.preis.notNull;Zahl eingeben! 0 = Kostenlos;Enter number! 0 = Free;Voer nummer in! 0 = Gratis
+fehler.tour.preis.positiv;Zahl eingeben! 0 = Kostenlos;Enter number! 0 = Free;Voer nummer in! 0 = Gratis
+#######################
+
+# PLAETZE
+tour.plaetze;Plätze;seats;zitplaatsen
+# > FEHLER-MASSAGES < #
+fehler.tour.plaetze.notNull;Zahl eingeben!;Enter number!;Voer nummer in!
+fehler.tour.plaetze.min; Min. 1 Sitzplatz!;Min. 1 seat!;Min. 1 zetel
+#######################
+
+# Anbieter
+tour.anbieter;Anbieter;Driver;Chauffeur
+# > EMPTY-VALUE < #
+tour.emptyvalues.anbieter;Bitte auswählen...;Please select...;Selecteer alstublieft...
+# > FEHLER-MASSAGES < #
+fehler.tour.anbieter.notEmpty;Anbieter wählen;Choose Provider;Kies aanbieder
+###################
+
+# STARTORT
+tour.startort;Startort;starting location;start locatie
+# > EMPTY-VALUE < #
+tour.emptyvalues.startort;Bitte auswählen...;Please select...;Selecteer alstublieft...
+# > FEHLER-MASSAGES < #
+fehler.tour.startort.notEmpty;Startort wählen;select starting Location;Startlocatie bestemming
+#######################
+
+# ZIELORT
+tour.zielort;Zielort;destination;bestemming
+# > EMPTY-VALUE < #
+tour.emptyvalues.zielort;Bitte auswählen...;Please select...;Selecteer alstublieft...
+# > FEHLER-MASSAGES < #
+fehler.tour.zielort.notEmpty;Zielort wählen;select Destination;Selecteer bestemming
+#######################
+
+# FAHRGAST-INFOS
+tour.fahrgastinfos;Fahrgastinformationen;passenger information;passagiersinformatie
+# > FEHLER-MASSAGES < #
+fehler.tour.fahrgastinfos.size;Statt 400 Zeichen zu lesen würde man selber fahren...;maximum 400 characters;In plaats van 400 tekens te lezen, zou je zelf rijden...;
+#######################
+
+# AUSWAHL
+tour.auswahl.fehlt;Bitte treffen Sie eine Auswahl;please select an item;selecteer een artikel, aub
+
+#_______________
+# [Tour - ENDE]
+
+#####################
+#     Tourliste     #
+#####################
+
+# PAGE
+tourliste.titel;Touren;Tours;Toeren
+tourliste.neu;Neue Tour;new tour;nieuw toer
+tourliste.empty;Keine Touren vorhanden!;No tours available!;Geen rondleidingen beschikbaar!
+
+# HEADLINE-COLS
+tourliste.colhead.Abfahrtzeitpunkt;Abfahrtzeitpunkt;departure time;Vertrektijd
+tourliste.colhead.preis;Preis (EUR);Price (EUR);Prijs (EUR)
+tourliste.colhead.plaetze;Plätze;Places;Plaatsen
+tourliste.colhead.startort;StartOrt;StartLocation;Startlocatie
+tourliste.colhead.zielort;Zielort;Destination;Bestemming
+tourliste.colhead.anbieter;Anbieter;Provider;Aanbieder
+
+# EINTRAG
+tourliste.eintrag.bearbeiten;bearbeiten;edit;bewerken
+tourliste.eintrag.loeschen;löschen;delete;wissen
+
+#____________________
+# [Tourliste - ENDE]

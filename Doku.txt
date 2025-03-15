@@ -11,3 +11,6 @@ Wird wäred der Kompillierung in .class Datei geschrieben, ist aber  nicht zur L
 RUNTIME --> Annotation zur Laufzeit verfügbar und über Reflection zugänglich ist. Sie wird sowohl in der .class-Datei gespeichert als auch zur Laufzeit verwendet.
 Java-Reflexion-Mechanismus: Der Java-Reflection-Mechanismus ermöglicht es, zur Laufzeit Informationen über Klassen, Methoden, Felder und andere Elemente des Programms zu erhalten und sie zu manipulieren. 
 //ohne dass diese Elemente zur Kompilierzeit bekannt sind. 
+
+Javadoc mit ./gradlew javadoc generieren lassen. Ist im ordner build/index.html verfügbar
+-->Kommentare dürfen kein "[]" enthalten
