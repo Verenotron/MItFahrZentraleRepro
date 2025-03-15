@@ -32,26 +32,6 @@ public class BenutzerController {
         return new BenutzerFormular();
     }
 
-    // @GetMapping("/benutzer")
-    // public String getBenutzer() {
-    //     return "benutzerbearbeiten";
-    // }
-
-    // @GetMapping("/international")
-    // public String changeLanguage(@Valid @ModelAttribute("benutzer") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
-    // //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
-    //                                 BindingResult result,
-    //                                 Locale locale, Model model){
-
-    //     model.addAttribute("Sprache", locale.getDisplayLanguage());
-    //     model.addAttribute("maxWunsch", maxWunsch);
-    //     if (result.hasErrors()){
-    //         return "benutzerbearbeiten";
-    //     }
-        
-    //     return "benutzerformular";
-    // }
-
     @PostMapping("/submit") //RequestHandler Methode
     public String postBenutzerDaten(@Valid @ModelAttribute("benutzer") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
