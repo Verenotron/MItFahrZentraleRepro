@@ -1,0 +1,13 @@
+
+Blatt 3:
+Passwort Validierung erstellen:
+
+@interface Passwort:
+@Target({ ElementType.FIELD }) --> eingrenzung wo die Annotation genutzt werden darf. Hier nur auf Felder.
+@Retention(RetentionPolicy.RUNTIME) --> RetentionPolicy-Enumeration in Java gibt an, wie lange die Annotation in Java erhalten und wo sie verwendet werden kann.
+SOURCE --> Annotation nur im Quellcode vorhanden, wird nach der Kompilierung verworfen. Nur für Quellcode-Analyse oder für Tools während der Entwicklungsphase relevant sind, aber nicht zur Laufzeit verfügbar sind. Debugging, Dokumentation, Tooling
+CLASS --> Bleibt in der .class-Datei und ist nach der Kompilierung verfügbar, jedoch nicht zur Laufzeit zugänglich.
+Wird wäred der Kompillierung in .class Datei geschrieben, ist aber  nicht zur Laufzeit zugänglich z.B. durch Reflection.
+RUNTIME --> Annotation zur Laufzeit verfügbar und über Reflection zugänglich ist. Sie wird sowohl in der .class-Datei gespeichert als auch zur Laufzeit verwendet.
+Java-Reflexion-Mechanismus: Der Java-Reflection-Mechanismus ermöglicht es, zur Laufzeit Informationen über Klassen, Methoden, Felder und andere Elemente des Programms zu erhalten und sie zu manipulieren. 
+//ohne dass diese Elemente zur Kompilierzeit bekannt sind. 

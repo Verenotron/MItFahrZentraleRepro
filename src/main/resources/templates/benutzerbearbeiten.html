@@ -23,7 +23,8 @@
         <div th:if="${#fields.hasErrors('benutzer.eMail')}" th:errors="*{benutzer.eMail}" class="error-text"></div>
 
         <label for="passwort">Passwort</label><br>
-        <input type="text" name="passwort" th:value="${benutzer.passwort}"><br>
+        <input type="text" name="passwort" th:value="${benutzer.passwort}" th:classappend="${#fields.hasErrors('benutzer.passwort')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzer.passwort')}" th:errors="*{benutzer.passwort}" class="error-text"></div>
 
         <label for="geburtstag">Geburtstag</label><br>
         <input type="date" name="geburtstag" th:value="${benutzer.geburtstag}" th:classappend="${#fields.hasErrors('benutzer.geburtstag')} ? 'error-border' : ''"><br>

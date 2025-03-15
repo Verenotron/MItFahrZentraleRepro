@@ -6,8 +6,9 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.WebProjekt.MItfahrZentrale.validators.Passwort;
+
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -15,12 +16,14 @@ import jakarta.validation.constraints.Size;
 
 public class BenutzerFormular {
     @NotBlank
-    @Size(min=3, max=80, message="Name muss min. 3 und max. 80 Zeichen lang sein.")
+    @Size(min=3, max=80, message="Name muss min. 3 und max. 80 Zeichen lang sein.") //ohne message gibt es Default-Fehlermeldungen
     String name;
     
     @Size(min=5, max=80, message="EMail muss zwischen 5 und 80 Zeichen lang sein.")
     @Email(message="Es mus ich um eine Email handeln.")
     String eMail;
+
+    @Passwort(value = "17", value2 = "siebzehn")
     String passwort;
     
     @NotNull(message="Geburtstag muss existieren.")
