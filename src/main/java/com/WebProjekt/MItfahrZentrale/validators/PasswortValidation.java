@@ -16,7 +16,7 @@ public class PasswortValidation implements ConstraintValidator <Passwort, String
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) { //ConstraintValidator führt Validierung tatsächlich aus
-        if(value.contains(key) || value.toLowerCase().contains(key2)){
+        if(value.contains(key) || value.toLowerCase().contains(key2) || value == ""){
             return true;
         }
         return false;

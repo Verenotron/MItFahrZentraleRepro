@@ -7,9 +7,10 @@
 <body>
     <header th:fragment="kopf">
         <nav>
-            <a href="${sprache}'" th:text="#{sprachen} + ' : '">Benutzer</a>
-            Wollen sie <a th:href="@{?sprache=de}">Deutsch</a>
-            oder <a th:href="@{?sprache=nl}">Niederländisch</a>?
+            <a href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
+            <a th:href="@{?sprache=de}">DE</a>
+            <a th:href="@{?sprache=en}">EN</a>
+            <a th:href="@{?sprache=nl}">NL</a>
         </nav>
     </header>
 
