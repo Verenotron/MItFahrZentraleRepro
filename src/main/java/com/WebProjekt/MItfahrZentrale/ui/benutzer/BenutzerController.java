@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
@@ -46,6 +47,16 @@ public class BenutzerController {
         }
         return "benutzerbearbeiten";
         
+    }
+
+    @GetMapping("/submit") //brauchen wir nur für den Sprachen wechsel
+    public String getSubmit(@RequestParam(name = "sprache", required = false) String sprache,
+                            Locale locale,
+                            Model model) {
+        model.addAttribute("maxWunsch", maxWunsch);
+        model.addAttribute("sprache", locale.getDisplayLanguage());
+        
+        return "benutzerbearbeiten";
     }
 
     @GetMapping("/benutzer/{n}") //RequestHandler Methode
