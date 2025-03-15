@@ -1,6 +1,7 @@
 
 Blatt 3:
-Passwort Validierung erstellen:
+eigene Passwort Validation:
+Passwort.java und PasswortValidation.java (/validators/). Passwort Annotation in BenutzerFormulat einfügen. 
 
 @interface Passwort:
 @Target({ ElementType.FIELD }) --> eingrenzung wo die Annotation genutzt werden darf. Hier nur auf Felder.
@@ -12,5 +13,12 @@ RUNTIME --> Annotation zur Laufzeit verfügbar und über Reflection zugänglich 
 Java-Reflexion-Mechanismus: Der Java-Reflection-Mechanismus ermöglicht es, zur Laufzeit Informationen über Klassen, Methoden, Felder und andere Elemente des Programms zu erhalten und sie zu manipulieren. 
 //ohne dass diese Elemente zur Kompilierzeit bekannt sind. 
 
+Internationalisierung:
+uebersetzungen-to-properties.py, InternationalConfiguration.java(/international/), in html th:text eingefügt und mit # auf property verwiesen, 
+property Pfade in validatoren im Benutzerformular gesetzt.
+
+
+
 Javadoc mit ./gradlew javadoc generieren lassen. Ist im ordner build/index.html verfügbar
 -->Kommentare dürfen kein "[]" enthalten
+

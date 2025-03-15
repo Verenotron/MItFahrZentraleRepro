@@ -1,5 +1,8 @@
 package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -34,12 +37,30 @@ public class BenutzerController {
     //     return "benutzerbearbeiten";
     // }
 
+    // @GetMapping("/international")
+    // public String changeLanguage(@Valid @ModelAttribute("benutzer") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
+    // //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
+    //                                 BindingResult result,
+    //                                 Locale locale, Model model){
+
+    //     model.addAttribute("Sprache", locale.getDisplayLanguage());
+    //     model.addAttribute("maxWunsch", maxWunsch);
+    //     if (result.hasErrors()){
+    //         return "benutzerbearbeiten";
+    //     }
+        
+    //     return "benutzerformular";
+    // }
+
     @PostMapping("/submit") //RequestHandler Methode
     public String postBenutzerDaten(@Valid @ModelAttribute("benutzer") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
                                     BindingResult result,
+                                    Locale locale,
                                     Model model){
         model.addAttribute("maxWunsch", maxWunsch);
+        model.addAttribute("sprache", locale.getDisplayLanguage());
+
         if (result.hasErrors()){
             return "benutzerbearbeiten";
         }
@@ -49,9 +70,11 @@ public class BenutzerController {
 
     @GetMapping("/benutzer/{n}") //RequestHandler Methode
     public String getBenutzerID(@PathVariable int n,
+                                Locale locale,
                                 Model model) {
         model.addAttribute("benutzerID", n);
         model.addAttribute("maxWunsch", maxWunsch);
+        model.addAttribute("sprache", locale.getDisplayLanguage());
         return "benutzerbearbeiten";
     }
     

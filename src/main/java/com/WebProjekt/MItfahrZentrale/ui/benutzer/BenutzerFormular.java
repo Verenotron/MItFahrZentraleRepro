@@ -15,15 +15,15 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 public class BenutzerFormular {
-    @NotBlank
-    @Size(min=3, max=80, message="Name muss min. 3 und max. 80 Zeichen lang sein.") //ohne message gibt es Default-Fehlermeldungen
+    @NotBlank(message = "{fehler.benutzer.name.notnull}")
+    @Size(min=3, max=80, message="{fehler.benutzer.name.size}") //ohne message gibt es Default-Fehlermeldungen
     String name;
     
-    @Size(min=5, max=80, message="EMail muss zwischen 5 und 80 Zeichen lang sein.")
-    @Email(message="Es mus ich um eine Email handeln.")
+    @Size(min=5, max=80, message="{fehler.benutzer.email.size}")
+    @Email(message="{fehler.benutzer.email.emailformat}")
     String eMail;
 
-    @Passwort(value = "17", value2 = "siebzehn")
+    @Passwort(value = "17", value2 = "siebzehn", message="{gutespasswort.fehler}")
     String passwort;
     
     @NotNull(message="Geburtstag muss existieren.")
