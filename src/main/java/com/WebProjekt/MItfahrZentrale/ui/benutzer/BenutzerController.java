@@ -85,7 +85,7 @@ public class BenutzerController {
         session.setAttribute("benutzer", benutzer);
         benutzerFormular.passwort = "";
 
-        return "benutzerbearbeiten";
+        return "redirect:/benutzer/" + benutzer.getId(); //nach dem post auf andern Pfad geleitet
         
         
     }
@@ -134,6 +134,7 @@ public class BenutzerController {
             benutzerFormular.fromBenutzer(aktBenutzer);
         }catch(Exception e){ 
             model.addAttribute("info", e);
+            logger.error(e.toString());
         }
         
         benutzerFormular.setId(n);
