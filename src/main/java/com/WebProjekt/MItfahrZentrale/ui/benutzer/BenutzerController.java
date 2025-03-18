@@ -66,11 +66,17 @@ public class BenutzerController {
 
         Benutzer benutzer = new Benutzer();
         benutzerFormular.toBenutzer(benutzer);
+
+        if(benutzerFormular.getId() == 0){ //ID ist im Formualr gesetzt, wenn benutzer aus der Datenbank geholt wurde, also benutzer/n betätigt wurde
+            benutzer = benutzerService.speichereBenutzer(benutzer);
+        }else{ 
+            benutzer = benutzerService.aktualisiereBenutzer(benutzer);
+        }
         
-        benutzer = benutzerService.speichereBenutzer(benutzer);
 
         benutzerFormular.fromBenutzer(benutzer);
         model.addAttribute("benutzer", benutzer); //wichtig, damit das Frontend auf daten zugreifen kann
+        model.addAttribute("benutzerID", benutzer.getId());
         session.setAttribute("benutzer", benutzer);
         benutzerFormular.passwort = "";
 
@@ -122,12 +128,13 @@ public class BenutzerController {
         benutzerFormular.fromBenutzer(aktBenutzer);
         
         benutzerFormular.setId(n);
+        benutzerFormular.setId(n);
         session.setAttribute("benutzerFormular", benutzerFormular);
         //session.setAttribute("benutzerID", n);
         benutzerFormular.passwort = "";
         model.addAttribute("benutzerFormular", benutzerFormular);
 
-        //model.addAttribute("benutzerID", n);
+        model.addAttribute("benutzerID", n);
         model.addAttribute("maxWunsch", maxWunsch);
         model.addAttribute("sprache", locale.getDisplayLanguage());
         return "benutzerbearbeiten";

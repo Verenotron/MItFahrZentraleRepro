@@ -47,6 +47,7 @@ public class BenutzerFormular {
     Set<String> magNicht = new HashSet<String>();
 
     public void toBenutzer(Benutzer b){ // befuellt b mit Formularinhalt
+        b.setId(this.getId());
         b.setName(this.name);
         b.seteMail(this.eMail);
         b.setGeburtstag(this.geburtstag);
@@ -56,6 +57,7 @@ public class BenutzerFormular {
     } 
 
     public void fromBenutzer(Benutzer b){ // fuellt Formularinhalt aus b
+        this.id = b.getId();
         this.name = b.getName();
         this.eMail = b.geteMail();
         this.geburtstag = b.getGeburtstag();

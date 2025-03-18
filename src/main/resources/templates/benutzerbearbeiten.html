@@ -18,7 +18,7 @@
             <div th:replace="fragments/kopffuss :: kopf"></div>
         </header>
         
-        <h1 th:if="!${titel}" th:text="#{benutzerformular.titel(${benutzer.id})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
+        <h1 th:if="!${titel}" th:text="#{benutzerformular.titel(${benutzerID})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
         <h1 th:if="${titel}" th:text="#{benutzerformular.titel.neu}"></h1>
 
         <form th:action="@{/submit}" method="post">
