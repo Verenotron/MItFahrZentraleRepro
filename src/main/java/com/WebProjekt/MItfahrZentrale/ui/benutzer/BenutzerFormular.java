@@ -34,7 +34,7 @@ public class BenutzerFormular {
     @Email(message="{fehler.benutzer.email.emailformat}")
     String eMail;
 
-    @NotBlank(message="{benutzer.passwort.ungesetzt}")
+    //@NotBlank(message="{benutzer.passwort.ungesetzt}") //Passwort wird nur im Backend überprüft ob es existiert. aber nicht hier
     @Passwort(value = "17", value2 = "siebzehn", message="{gutespasswort.fehler}")
     String passwort;
     

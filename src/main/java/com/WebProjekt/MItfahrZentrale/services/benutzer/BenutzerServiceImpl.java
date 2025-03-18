@@ -40,13 +40,15 @@ public class BenutzerServiceImpl implements BenutzerService{
         benutzerRepository.deleteById(id);
     }
 
-    public Benutzer aktualisiereBenutzer(Benutzer b){ 
+    public Benutzer aktualisiereBenutzer(Benutzer b){ // Aktualisiert vorhandenen Benutzer
         return benutzerRepository.findById(b.getId()).map(existingUser -> {
             existingUser.setName(b.getName());
             existingUser.seteMail(b.geteMail());
             existingUser.setGeburtstag(b.getGeburtstag());
-            existingUser.setPasswort(b.getPasswort());
-            return benutzerRepository.save(existingUser); // Aktualisiert vorhandenen Benutzer
+            if(b.getPasswort() != null && !b.getPasswort().isEmpty()){ 
+                existingUser.setPasswort(b.getPasswort());
+            }
+            return benutzerRepository.save(existingUser); 
         })
         .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
     }
