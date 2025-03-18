@@ -18,43 +18,44 @@
             <div th:replace="fragments/kopffuss :: kopf"></div>
         </header>
         
-        <h1 th:text="#{benutzerformular.titel(${benutzerID})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
-        
+        <h1 th:if="!${titel}" th:text="#{benutzerformular.titel(${benutzer.id})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
+        <h1 th:if="${titel}" th:text="#{benutzerformular.titel.neu}"></h1>
+
         <form th:action="@{/submit}" method="post">
 
         <label for="name" th:text="#{benutzer.name}"></label><br> <!-- for Attribut gibt die id des dazugehörigen input feldes an, da die beiden zusammengehören-->
-        <input type="text" name="name" th:value="${benutzer.name}" th:classappend="${#fields.hasErrors('benutzer.name')} ? 'error-border' : ''"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
-        <div th:if="${#fields.hasErrors('benutzer.name')}" th:errors="*{benutzer.name}" class="error-text"></div> <!-- Utility-Klasse #fields kann auf BindingResult Ergebnisse des RequestHandlers zurückgreifen.-->
-        <!-- th:errors zeigt Validierungsfehler(selbstdefinierte messages) für das Feld benutzer.name an. *{} verweist auf das aktuelle Objekt im Model attribut (hier benutzer). -->
+        <input type="text" name="name" th:value="${benutzerFormular.name}" th:classappend="${#fields.hasErrors('benutzerFormular.name')} ? 'error-border' : ''"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
+        <div th:if="${#fields.hasErrors('benutzerFormular.name')}" th:errors="*{benutzerFormular.name}" class="error-text"></div> <!-- Utility-Klasse #fields kann auf BindingResult Ergebnisse des RequestHandlers zurückgreifen.-->
+        <!-- th:errors zeigt Validierungsfehler(selbstdefinierte messages) für das Feld benutzer.name an. *{} verweist auf das aktuelle Objekt im Model attribut (hier benutzerFormular). -->
         <!-- class="error" ist ein CSS-Klassensektor. Manuelle ausgestaltung möglich mit .error-->
         <!-- th:classappend fügt dem Input-feld eine CSS Klasse hinzu, wenn ein Fehler in benutzer.name vorliegt-->
         
         <label for="eMail" th:text="#{benutzer.email}"></label><br>
-        <input type="text" name="eMail" th:value="${benutzer.eMail}" th:classappend="${#fields.hasErrors('benutzer.eMail')} ? 'error-border' : ''"><br>
-        <div th:if="${#fields.hasErrors('benutzer.eMail')}" th:errors="*{benutzer.eMail}" class="error-text"></div>
+        <input type="text" name="eMail" th:value="${benutzerFormular.eMail}" th:classappend="${#fields.hasErrors('benutzerFormular.eMail')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzerFormular.eMail')}" th:errors="*{benutzerFormular.eMail}" class="error-text"></div>
 
         <label for="passwort" th:text="#{benutzer.passwort}"></label><br>
-        <input type="text" name="passwort" th:value="${benutzer.passwort}" th:classappend="${#fields.hasErrors('benutzer.passwort')} ? 'error-border' : ''"><br>
-        <div th:if="${#fields.hasErrors('benutzer.passwort')}" th:errors="*{benutzer.passwort}" class="error-text"></div>
+        <input type="text" name="passwort" th:value="${benutzerFormular.passwort}" th:classappend="${#fields.hasErrors('benutzerFormular.passwort')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzerFormular.passwort')}" th:errors="*{benutzerFormular.passwort}" class="error-text"></div>
 
         <label for="geburtstag" th:text="#{benutzer.geburtstag}"></label><br>
-        <input type="date" name="geburtstag" th:value="${benutzer.geburtstag}" th:classappend="${#fields.hasErrors('benutzer.geburtstag')} ? 'error-border' : ''"><br>
-        <div th:if="${#fields.hasErrors('benutzer.geburtstag')}" th:errors="*{benutzer.geburtstag}" class="error-text"></div>
+        <input type="date" name="geburtstag" th:value="${benutzerFormular.geburtstag}" th:classappend="${#fields.hasErrors('benutzerFormular.geburtstag')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('benutzerFormular.geburtstag')}" th:errors="*{benutzerFormular.geburtstag}" class="error-text"></div>
 
         <table>
             <tr>
                 <th>
                     <label for="mag" th:text="#{benutzer.magich}"></label><br>
                     <p th:text="'(max. ' + ${maxWunsch} +')'"></p><br>
-                    <input th:if="${maxWunsch} != ${#lists.size(benutzer.mag)}" type="text" name="mag">
-                    <p th:each="element : ${#lists.sort(benutzer.mag)}" th:text="${element}"></p> <!-- mit # bekommt Thymeleaf Zugriff auf Utility Objekte (vorfefinierte Helferklassen)-->
+                    <input th:if="${maxWunsch} != ${#lists.size(benutzerFormular.mag)}" type="text" name="mag">
+                    <p th:each="element : ${#lists.sort(benutzerFormular.mag)}" th:text="${element}"></p> <!-- mit # bekommt Thymeleaf Zugriff auf Utility Objekte (vorfefinierte Helferklassen)-->
                 </th>
 
                 <th>
                     <label for="magNicht" th:text="#{benutzer.magichnicht}"></label><br>
                     <p th:text="'(max. ' + ${maxWunsch} +')'"></p><br>
-                    <input th:if="${maxWunsch} != ${#lists.size(benutzer.magNicht)}" type="text" name="magNicht">
-                    <p th:each="element : ${#lists.sort(benutzer.magNicht)}" th:text="${element}"></p>
+                    <input th:if="${maxWunsch} != ${#lists.size(benutzerFormular.magNicht)}" type="text" name="magNicht">
+                    <p th:each="element : ${#lists.sort(benutzerFormular.magNicht)}" th:text="${element}"></p>
                 </th>
 
             </tr>
