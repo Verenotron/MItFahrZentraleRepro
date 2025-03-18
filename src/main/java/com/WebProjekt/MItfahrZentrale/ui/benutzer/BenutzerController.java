@@ -68,7 +68,12 @@ public class BenutzerController {
         benutzerFormular.toBenutzer(benutzer);
 
         if(benutzerFormular.getId() == 0){ //ID ist im Formualr gesetzt, wenn benutzer aus der Datenbank geholt wurde, also benutzer/n betätigt wurde
-            benutzer = benutzerService.speichereBenutzer(benutzer);
+            try{ 
+                benutzer = benutzerService.speichereBenutzer(benutzer);
+            }catch(Exception e){ 
+                model.addAttribute("info", "Fehler beim Speichern des Benutzers");
+            }
+            
         }else{ 
             benutzer = benutzerService.aktualisiereBenutzer(benutzer);
         }
@@ -124,8 +129,12 @@ public class BenutzerController {
                                 HttpSession session,
                                 Model model) {
 
-        Benutzer aktBenutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
-        benutzerFormular.fromBenutzer(aktBenutzer);
+        try{ 
+            Benutzer aktBenutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            benutzerFormular.fromBenutzer(aktBenutzer);
+        }catch(Exception e){ 
+            model.addAttribute("info", e);
+        }
         
         benutzerFormular.setId(n);
         benutzerFormular.setId(n);

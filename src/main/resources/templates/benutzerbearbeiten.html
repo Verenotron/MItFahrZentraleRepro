@@ -17,6 +17,8 @@
         <header>
             <div th:replace="fragments/kopffuss :: kopf"></div>
         </header>
+
+        <p th:if="${info}" th:text="${info}"></p>
         
         <h1 th:if="!${titel}" th:text="#{benutzerformular.titel(${benutzerID})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
         <h1 th:if="${titel}" th:text="#{benutzerformular.titel.neu}"></h1>

@@ -45,7 +45,7 @@ public class BenutzerServiceImpl implements BenutzerService{
             existingUser.setName(b.getName());
             existingUser.seteMail(b.geteMail());
             existingUser.setGeburtstag(b.getGeburtstag());
-            if(b.getPasswort() != null && !b.getPasswort().isEmpty()){ 
+            if(b.getPasswort() != null && !b.getPasswort().isEmpty()){  //Falls PasswortString leer ist, wird altes Passwort übernommen. Kann man auch anders machen siehe Blatt4 S.4+5
                 existingUser.setPasswort(b.getPasswort());
             }
             return benutzerRepository.save(existingUser); 
