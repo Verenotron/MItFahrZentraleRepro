@@ -24,18 +24,18 @@ import jakarta.validation.Valid;
 
 
 @Controller
-@SessionAttributes("benutzerFormular") //Sorgt dasfür, das bereits erstellete Objekt(initBneutzer) unter "benutzer" über mehrere Requests hinweg, in der Session gespeichert bleibt
-public class BenutzerController {
+@SessionAttributes("benutzerFormular") // listet Model-Attribute, die (transparent) in Session gespeichert werden sollen. Nutzung wie gewohnt per @ModelAttribute. 
+public class BenutzerController { // Wird über mehrere Requests automatisch wieder ins Model geladen.
 
     private static final Logger logger = LoggerFactory.getLogger(BenutzerController.class); //mit .class erhalte ich den Typ des Objektes, nicht die Instanz
     //LoggerFactory müssen als Fabrikklasse nicht direkt instanziiert werden. 
 
     int maxWunsch = 5;
 
-    @Autowired private BenutzerServiceImpl benutzerService;//DependencyInjection, 
+    @Autowired private BenutzerServiceImpl benutzerService;//DependencyInjection, Instanziierung und initialisierung
     //Autowired weist Spring an automatisch die passende Bean zur Verfügung zu stellen
 
-    @ModelAttribute("benutzerFormular")
+    @ModelAttribute("benutzerFormular") //Wird vor jedem Handler aufruf aufgerufen. Initialisiert das Attribut, falls es nicht existiert.
     public BenutzerFormular initBenutzer(){ //Der Rückgabewert wird im Model und Session(@SessionAttributes) unter "benutzer" hinzugefügt.
         return new BenutzerFormular();
     }
@@ -49,12 +49,13 @@ public class BenutzerController {
         }
     }
 
+    //Spring sucht @ModelAttribute Parameter der Reihe nach in Model, dann in @SessionAttributes, dann in Pfadvariablen, sonst erzeugt es eine neue Instanz.
+
     @PostMapping("/submit") //RequestHandler Methode
     public String postBenutzerDaten(@Valid @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
                                     BindingResult result,
                                     Locale locale,
-                                    HttpSession session,
                                     Model model){
 
         model.addAttribute("maxWunsch", maxWunsch);
@@ -82,7 +83,6 @@ public class BenutzerController {
         benutzerFormular.fromBenutzer(benutzer);
         model.addAttribute("benutzer", benutzer); //wichtig, damit das Frontend auf daten zugreifen kann
         model.addAttribute("benutzerID", benutzer.getId());
-        session.setAttribute("benutzer", benutzer);
         benutzerFormular.passwort = "";
 
         return "redirect:/benutzer/" + benutzer.getId(); //nach dem post auf andern Pfad geleitet
@@ -91,9 +91,9 @@ public class BenutzerController {
     }
 
     @GetMapping("/submit") //brauchen wir nur für den Sprachen wechsel
-    public String getSubmit(@RequestParam(name = "sprache", required = false) String sprache,
+    public String getSubmit(@RequestParam(name = "sprache", required = false) String sprache, //Parameter sprache ist optional, wenn er fehlt, wird er auf null gesetzt
                             Locale locale,
-                            Model model) {
+                            Model model) { //Model wird per DepedencyInjection initialisiert
         model.addAttribute("maxWunsch", maxWunsch);
         model.addAttribute("sprache", locale.getDisplayLanguage());
         
@@ -104,7 +104,6 @@ public class BenutzerController {
     public String showForm(@ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
                             @ModelAttribute("benutzer") Benutzer benutzer,
                             Locale locale,
-                            HttpSession session,
                             Model model){ 
     
     benutzerFormular = new BenutzerFormular();
@@ -112,12 +111,7 @@ public class BenutzerController {
     model.addAttribute("benutzerFormular", benutzerFormular);
     model.addAttribute("titel", "Neues Benutzerprofil");
 
-    // session.setAttribute("benutzerFormular", new BenutzerFormular());
-    // session.setAttribute("benutzer", new Benutzer());
-    // model.addAttribute("titel", "Neues Benutzerprofil");
-    // session.setAttribute("benutzerID", 0);
     return "benutzerbearbeiten";
-
 
     }
 
@@ -126,7 +120,6 @@ public class BenutzerController {
                                 @ModelAttribute("benutzer") Benutzer benutzer,
                                 @PathVariable int n,
                                 Locale locale,
-                                HttpSession session,
                                 Model model) {
 
         try{ 
@@ -135,12 +128,12 @@ public class BenutzerController {
         }catch(Exception e){ 
             model.addAttribute("info", e);
             logger.error(e.toString());
+            benutzerFormular = new BenutzerFormular();
+            model.addAttribute("benutzerFormular", benutzerFormular);
         }
         
         benutzerFormular.setId(n);
         benutzerFormular.setId(n);
-        session.setAttribute("benutzerFormular", benutzerFormular);
-        //session.setAttribute("benutzerID", n);
         benutzerFormular.passwort = "";
         model.addAttribute("benutzerFormular", benutzerFormular);
 
