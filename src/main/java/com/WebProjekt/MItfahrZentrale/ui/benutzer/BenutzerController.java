@@ -55,22 +55,27 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         model.addAttribute("maxWunsch", maxWunsch);
         model.addAttribute("sprache", locale.getDisplayLanguage());
 
-        if (result.hasErrors()){
-            return "benutzerbearbeiten";
-        }
-
         Benutzer benutzer = new Benutzer();
         benutzerFormular.toBenutzer(benutzer);
 
-        if(benutzerFormular.getId() == 0){ //ID ist im Formualr gesetzt, wenn benutzer aus der Datenbank geholt wurde, also benutzer/n betätigt wurde
+        if(benutzerFormular.getId() == 0 && benutzerFormular.getPasswort().isEmpty()){ 
+            result.rejectValue(
+            "passwort", // Formularfeld
+            "benutzer.passwort.ungesetzt", // Message-Key
+            "Passwort wurde noch nicht gesetzt");
+        }else if(benutzerFormular.getId() == 0){ //ID ist im Formualr gesetzt, wenn benutzer aus der Datenbank geholt wurde, also benutzer/n betätigt wurde
             try{ 
                 benutzer = benutzerService.speichereBenutzer(benutzer);
             }catch(Exception e){ 
                 model.addAttribute("info", "Fehler beim Speichern des Benutzers");
             }
             
-        }else{ 
+        }else{
             benutzer = benutzerService.aktualisiereBenutzer(benutzer);
+        }
+
+        if (result.hasErrors()){ //falls result.reject aufgerufen ist das hier true
+            return "benutzerbearbeiten";
         }
         
         benutzerFormular.fromBenutzer(benutzer);
