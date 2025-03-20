@@ -1,5 +1,7 @@
 package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import com.WebProjekt.MItfahrZentrale.MItfahrZentraleApplication;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 
@@ -23,7 +26,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("benutzerFormular") // listet Model-Attribute, die (transparent) in Session gespeichert werden sollen. Nutzung wie gewohnt per @ModelAttribute. 
-public class BenutzerController { // Wird über mehrere Requests automatisch wieder ins Model geladen.
+public class BenutzerController {// Wird über mehrere Requests automatisch wieder ins Model geladen.
 
     private static final Logger logger = LoggerFactory.getLogger(BenutzerController.class); //mit .class erhalte ich den Typ des Objektes, nicht die Instanz
     //LoggerFactory müssen als Fabrikklasse nicht direkt instanziiert werden. 
@@ -87,6 +90,27 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
         model.addAttribute("sprache", locale.getDisplayLanguage());
         
         return "benutzerbearbeiten";
+    }
+
+    @GetMapping("/benutzer")
+    public String showBenutzer(Model model){ 
+
+        try{ 
+            List<Benutzer> alleBenutzer = benutzerService.holeAlleBenutzer();
+            alleBenutzer.sort(Comparator.comparing(Benutzer::getName).thenComparing(Benutzer::geteMail)); //erst nach name, dann nach email sortieren
+            model.addAttribute("benutzerListe", alleBenutzer);
+        }catch(Exception e){ 
+            model.addAttribute("info", e.toString());
+            logger.info("Fehler beim Laden der Benutzer aus der Datenbank.");
+        }
+
+        return "benutzerliste";
+    }
+
+    @GetMapping("/benutzer/{n}/del")
+    public String loescheBenutzer(@PathVariable int n){ 
+        benutzerService.loescheBenutzerMitId(n);
+        return "redirect:/benutzer";
     }
 
     @GetMapping("/benutzer/0")
