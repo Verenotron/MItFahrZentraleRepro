@@ -1,11 +1,11 @@
 package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 
-import java.util.Enumeration;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.web.Link;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 
@@ -40,8 +39,10 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
     }
 
     //Spring sucht @ModelAttribute Parameter der Reihe nach in Model, dann in @SessionAttributes, dann in Pfadvariablen, sonst erzeugt es eine neue Instanz.
+    //@GetMapping wird aufgerufen, wenn die Seite per URL-Aufruf oder Link geladen wird.
+    //@PostMapping wird aufgerufen, wenn ein Formular per Submit-Button abgeschickt wird.
 
-    @PostMapping("/submit") //RequestHandler Methode
+    @PostMapping("/submit") //RequestHandler Methode, URL pfad wird beim Post in hintergrund übertragen im HTTP-Body, nicht in der URL
     public String postBenutzerDaten(@Valid @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //Spring befüllt benutzerFormular mit daten aus der View automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
                                     BindingResult result,
@@ -78,7 +79,7 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
         
     }
 
-    @GetMapping("/submit") //brauchen wir nur für den Sprachen wechsel
+    @GetMapping("/submit") //brauchen wir nur für den Sprachen wechsel, wenn ich erst auf submit und dann die sprache wechseln will
     public String getSubmit(@RequestParam(name = "sprache", required = false) String sprache, //Parameter sprache ist optional, wenn er fehlt, wird er auf null gesetzt
                             Locale locale,
                             Model model) { //Model wird per DepedencyInjection initialisiert
