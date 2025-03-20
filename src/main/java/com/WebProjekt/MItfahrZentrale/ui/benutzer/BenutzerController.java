@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import com.WebProjekt.MItfahrZentrale.MItfahrZentraleApplication;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 
@@ -40,19 +39,10 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
         return new BenutzerFormular();
     }
 
-    private void enumerateSession(HttpSession session){ 
-        Enumeration<String> attributeNames = session.getAttributeNames();
-        while(attributeNames.hasMoreElements()){ 
-            String attributeName = attributeNames.nextElement();
-            Object value = session.getAttribute(attributeName);
-            logger.info(attributeName + (String) value);
-        }
-    }
-
     //Spring sucht @ModelAttribute Parameter der Reihe nach in Model, dann in @SessionAttributes, dann in Pfadvariablen, sonst erzeugt es eine neue Instanz.
 
     @PostMapping("/submit") //RequestHandler Methode
-    public String postBenutzerDaten(@Valid @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //BenutzerFormular befüllt benutzerFormular automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
+    public String postBenutzerDaten(@Valid @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //Spring befüllt benutzerFormular mit daten aus der View automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
                                     BindingResult result,
                                     Locale locale,
@@ -79,9 +69,7 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
             benutzer = benutzerService.aktualisiereBenutzer(benutzer);
         }
         
-
         benutzerFormular.fromBenutzer(benutzer);
-        model.addAttribute("benutzer", benutzer); //wichtig, damit das Frontend auf daten zugreifen kann
         model.addAttribute("benutzerID", benutzer.getId());
         benutzerFormular.passwort = "";
 
@@ -116,14 +104,14 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
     }
 
     @GetMapping("/benutzer/{n}") //RequestHandler Methode
-    public String getBenutzerID(@ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
+    public String getBenutzerID(@ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //benutzerFormular als Modelattribut hinzugrfügt. Muss nicht mehr manuell gemacht werden die z.B. maxwunsch
                                 @ModelAttribute("benutzer") Benutzer benutzer,
                                 @PathVariable int n,
                                 Locale locale,
                                 Model model) {
 
         try{ 
-            Benutzer aktBenutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            Benutzer aktBenutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));//Lambda Ausdruck innerhalb einer orElseThrow Methode, wird geworfen wenn kein Wert im Optional vorhanden ist
             benutzerFormular.fromBenutzer(aktBenutzer);
         }catch(Exception e){ 
             model.addAttribute("info", e);
@@ -132,50 +120,11 @@ public class BenutzerController { // Wird über mehrere Requests automatisch wie
             model.addAttribute("benutzerFormular", benutzerFormular);
         }
         
-        benutzerFormular.setId(n);
-        benutzerFormular.setId(n);
         benutzerFormular.passwort = "";
-        model.addAttribute("benutzerFormular", benutzerFormular);
-
         model.addAttribute("benutzerID", n);
         model.addAttribute("maxWunsch", maxWunsch);
         model.addAttribute("sprache", locale.getDisplayLanguage());
         return "benutzerbearbeiten";
     }
 
-    // @GetMapping("/benutzer/{n}") //RequestHandler Methode
-    // public String getBenutzerID(@ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
-    //                             @PathVariable int n,
-    //                             Locale locale,
-    //                             HttpSession session,
-    //                             Model model) {
-        
-    //     if (n == 0){
-    //         session.setAttribute("benutzerFormular", new BenutzerFormular());
-    //         session.setAttribute("benutzer", new Benutzer());
-    //         model.addAttribute("titel", "Neues Benutzerprofil");
-    //         session.setAttribute("benutzerID", n);
-    //         return "benutzerbearbeiten";
-
-    //     }else if(n > 0){
-    //         Benutzer aktBenutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
-    //         benutzerFormular.fromBenutzer(aktBenutzer);
-    //         session.setAttribute("benutzerFormular", benutzerFormular);
-    //         session.setAttribute("benutzerID", n);
-    //         benutzerFormular.passwort = "";
-    //         model.addAttribute("benutzerFormular", benutzerFormular);
-
-    //         model.addAttribute("benutzerID", n);
-    //         model.addAttribute("maxWunsch", maxWunsch);
-    //         model.addAttribute("sprache", locale.getDisplayLanguage());
-    //         return "benutzerbearbeiten";
-    //     }else{
-
-    //         model.addAttribute("benutzerID", n);
-    //         model.addAttribute("maxWunsch", maxWunsch);
-    //         model.addAttribute("sprache", locale.getDisplayLanguage());
-    //         return "benutzerbearbeiten";
-
-    //     }
-    // }   
 }
