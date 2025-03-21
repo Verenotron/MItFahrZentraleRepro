@@ -2,10 +2,13 @@ package com.WebProjekt.MItfahrZentrale.entities.benutzer;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 import com.WebProjekt.MItfahrZentrale.validators.Passwort;
 
 import jakarta.persistence.ElementCollection;
@@ -52,8 +55,16 @@ public class Benutzer {
     @ElementCollection
     private Set<String> magNicht = new HashSet<String>();
 
+    private List<Tour> angeboteneTouren = new LinkedList<Tour>();
+
     public String getName() {
         return name;
+    }
+    public List<Tour> getAngeboteneTouren() {
+        return angeboteneTouren;
+    }
+    public void addTouren(Tour neueTour) {
+        this.angeboteneTouren.add(neueTour);
     }
     public void setName(String name) {
         this.name = name;
