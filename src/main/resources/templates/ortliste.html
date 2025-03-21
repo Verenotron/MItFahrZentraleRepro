@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Ortliste</title>
+</head>
+<body>
+
+    <header>
+        <div th:replace="fragments/kopffuss :: kopf"></div>
+    </header>
+
+    <h1 th:text="#{kopf.orte}"></h1>
+
+    <table>
+        <tr th:each="ort : ${alleOrte}">
+            <th th:text="${ort.id}"></th>
+            <th th:text="${ort.name}"></th>
+            <th th:text="${ort.geobreite}"></th>
+            <th th:text="${ort.geolaenge}"></th>
+            <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button></th> <!-- ohne type=button wird ein button in einem form element automatisch als type="submit" behandelt-->
+            <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button></th> <!-- type_button verhindert das und macht den Button rein funktional(z.B. für JavaScript-Akrionen)-->
+        </tr>
+    </table>
+
+    <button th:attr="onclick='window.location.href=\'/ort/0\''" th:text="#{ortsliste.neu}"></button>
+
+    <footer>
+        <div th:replace="fragments/kopffuss :: fuss"></div>
+    </footer>
+    
+</body>
+</html>

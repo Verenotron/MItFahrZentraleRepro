@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Ort anlegen</title>
+</head>
+<body>
+
+    <header>
+        <div th:replace="fragments/kopffuss :: kopf"></div>
+    </header>
+
+    <h1 th:if="${ortID} == 0" th:text="#{ortformular.titel.neu}"></h1>
+    <h1 th:if="${ortID} != 0" th:text="#{ortformular.titel(${ortID})}"></h1>
+
+    <form th:action="@{/submitOrt}" method="post">
+
+        <label for="ortname" th:text="#{ort.name}"></label><br>
+        <input type="text" name="name" th:value="${ortFormular.name}"><br> <!-- muss name gleich dem Namen des Formularattributs entsprehen??? Post methode wurde nach anpassung aufgerufen-->
+
+        <table>
+            <tr>
+                <label for="geobreite" th:text="#{ort.geobreite}"></label><br>
+                <input type="text" name="geobreite" th:value="${ortFormular.geobreite}"><br>
+            </tr>
+            <tr>
+                <label for="geolaenge" th:text="#{ort.geolaenge}"></label><br>
+                <input type="text" name="geolaenge" th:value="${ortFormular.geolaenge}"><br>
+            </tr>
+        </table>
+
+        <button type="submit">OK</button> <!-- type ist standardmäßig submit-->
+    </form>
+
+    <footer>
+        <div th:replace="fragments/kopffuss :: fuss"></div>
+    </footer>
+    
+</body>
+</html>

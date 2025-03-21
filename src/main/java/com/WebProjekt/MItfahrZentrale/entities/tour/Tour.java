@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -29,14 +30,22 @@ public class Tour {
 
     @PositiveOrZero
     private int preis;
+
     @Min(1)
     private int plaetze;
+    
     @Max(400)
     private String info;
+
+    @ManyToOne
     private Benutzer anbieter;
+
     @NotNull
+    @ManyToOne
     private Ort startOrt;
+
     @NotNull
+    @ManyToOne
     private Ort zielOrt;
 
     public Ort getZielOrt() {
