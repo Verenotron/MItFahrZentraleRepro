@@ -6,18 +6,28 @@
 </head>
 <body>
     <header th:fragment="kopf">
-        <nav>
-            <a href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
-            <a th:href="@{?sprache=de}">DE</a>
-            <a th:href="@{?sprache=en}">EN</a>
-            <a th:href="@{?sprache=nl}">NL</a>
+        <nav class="header-content">
+            <div class="div-header">
+                <a class="text" th:href="@{/benutzer}" th:text="#{kopf.benutzer}"></a>
+                <a class="text" th:href="@{/ort}" th:text="#{kopf.orte}"></a>
+            </div>
+            <div class="div-header">
+                <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
+                <a class="text" th:href="@{?sprache=de}">DE</a>
+                <a class="text" th:href="@{?sprache=en}">EN</a>
+                <a class="text" th:href="@{?sprache=nl}">NL</a>
+            </div>            
+            
         </nav>
+
+        <p class="error-border" th:if="${info}" th:text="${info}"></p>
+        
     </header>
 
     <footer th:fragment="fuss">
         <nav>
-            <a href="#" th:text="#{fuss.impressum}"></a>
-            <a href="#" th:text="#{fuss.kontakt}"></a>
+            <a class="text" href="#" th:text="#{fuss.impressum}"></a>
+            <a class="text" href="#" th:text="#{fuss.kontakt}"></a>
         </nav>
     </footer>
 

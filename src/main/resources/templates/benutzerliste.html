@@ -12,25 +12,29 @@
         <div th:replace="fragments/kopffuss :: kopf"></div>
     </header>
 
-    <h1 th:text="#{benutzerliste.titel}"></h1>
+    <div class="main-content">
 
-    <table>
-        <tr th:each="benutzer : ${benutzerListe}">
-            <th th:text="${benutzer.id}"></th>
-            <th th:text="${benutzer.name}"></th>
-            <th th:text="${benutzer.eMail}"></th>
-            <th th:text="${benutzer.geburtstag}"></th>
-            <th>
-                <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button>
-            </th>
-            <th>
-                <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button>
-                <!-- th:attr wird gebraucht, weil hier der Wert dynamisch zusammengesetzt wird und komplexe Zeichen wie "" und '' maskiert werden sollen.
-                th:onklick geht nur bei einfacheren und weniger komplexen werten
-                \ Backslash (auch am ende des Strings!!!) maskiert das '', damit es als Zeichen und nicht als Begrenzung der Zeichenkette interpretiert wird.-->
-            </th>
-        </tr>
-    </table>
+        <h1 th:text="#{benutzerliste.titel}"></h1>
+
+        <table>
+            <tr th:each="benutzer : ${benutzerListe}">
+                <th th:text="${benutzer.id}"></th>
+                <th th:text="${benutzer.name}"></th>
+                <th th:text="${benutzer.eMail}"></th>
+                <th th:text="${benutzer.geburtstag}"></th>
+                <th>
+                    <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button>
+                </th>
+                <th>
+                    <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button>
+                    <!-- th:attr wird gebraucht, weil hier der Wert dynamisch zusammengesetzt wird und komplexe Zeichen wie "" und '' maskiert werden sollen.
+                    th:onklick geht nur bei einfacheren und weniger komplexen werten
+                    \ Backslash (auch am ende des Strings!!!) maskiert das '', damit es als Zeichen und nicht als Begrenzung der Zeichenkette interpretiert wird.-->
+                </th>
+            </tr>
+        </table>
+
+    </div>
 
     <th>
         <button th:attr="onclick='window.location.href=\'/benutzer/0\''" th:text="#{benutzerliste.neu}"></button>

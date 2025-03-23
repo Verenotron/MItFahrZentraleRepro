@@ -54,7 +54,7 @@ public class OrtController {
                 ort = ortService.aktualisiereOrt(ort);
             }catch(Exception e){
                 logger.error(e.toString());
-                model.addAttribute("info", e.toString());
+                model.addAttribute("info", e.getMessage());
             }
         }
         ortFormular.fromOrt(ort);
@@ -95,13 +95,13 @@ public class OrtController {
     public String getOrt(@ModelAttribute("ortFormular") OrtFormular ortFormular,
                         @PathVariable int n,
                         Model model){
-
+        
         try{
             Ort ort = new Ort();
             ort = ortService.holeOrtMitId(n).orElseThrow(() -> new RuntimeException("Ort nicht gefunden"));
             ortFormular.fromOrt(ort);
         }catch(Exception e){
-            model.addAttribute("info", e.toString());
+            model.addAttribute("info", e.getMessage());
             logger.error(e.toString());
         }
         

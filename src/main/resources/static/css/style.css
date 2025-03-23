@@ -1,5 +1,18 @@
 /* CSS dateien müssen in Spring im resources-Ordner abgelegt werden */
 
+html, body{
+    height: 100%;
+}
+
+.main-content{
+    position: relative; /*min-height funktioniert nicht ohne position relative*/
+    min-height: 300px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .error-text {
     color : red;
     font-size: 10pt;
@@ -7,6 +20,50 @@
 
 .error-border{
     border: 2px solid red;
-
     background-color: #ffe6e6;
+}
+
+.error-box{
+    background-color: #ffe6e6;
+    border-left: 5px red;
+    padding: 10px;
+    margin: 10px 0;
+    color: red;
+}
+
+.header-content{
+    background-color: #aedbb3;
+    display: flex; /*Setzt innere(Kinder) und äußere Eigenschaften eines Elements. Elemente lassen sich flexibel und dynamisch in einer Reihe oder Spalte anordnen*/
+    flex-direction:row; /*standardwert. Horizontale Anordnung der Elemente*/
+    justify-content: space-between; /*verweilt die elemente in einer Rehe, mit Maximalem Abstand zwischen ihnen*/
+    align-items: center; /*Damit Kinder von oben und unten gesehen mittig in der nav-bar gesetzt werden.*/
+    padding: 10px;
+}
+
+.div-header{
+    display: flex;
+    gap: 15px;
+}
+
+.text{
+    text-decoration: none; /*Damit Unterstriche der Links entfernt werden*/
+    color: black;
+}
+
+.footer-content{
+    background-color:#aedbb3;
+    /*align-items: center;*/
+    padding: 10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    min-height: 100px;
+}
+
+td, th{
+    padding:10px;
+}
+
+button{
+    padding: 10px;
 }

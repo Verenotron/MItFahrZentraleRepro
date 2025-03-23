@@ -13,24 +13,35 @@
         <div th:replace="fragments/kopffuss :: kopf"></div>
     </header>
 
-    <h1 th:text="#{kopf.orte}"></h1>
+    <div class="main-content">
+        <h1 th:text="#{kopf.orte}"></h1>
 
-    <table>
-        <tr th:each="ort : ${alleOrte}">
-            <th th:text="${ort.id}"></th>
-            <th th:text="${ort.name}"></th>
-            <th th:text="${ort.geobreite}"></th>
-            <th th:text="${ort.geolaenge}"></th>
-            <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button></th> <!-- ohne type=button wird ein button in einem form element automatisch als type="submit" behandelt-->
-            <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button></th> <!-- type_button verhindert das und macht den Button rein funktional(z.B. für JavaScript-Akrionen)-->
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Grobreite</th>
+                <th>Geolaenge</th>
+            </tr>
+            <tr class="table" th:each="ort : ${alleOrte}">
+                <th th:text="${ort.id}"></th>
+                <th th:text="${ort.name}"></th>
+                <th th:text="${ort.geobreite}"></th>
+                <th th:text="${ort.geolaenge}"></th>
+                <th><a th:href="|https://www.openstreetmap.org/#map=14/${ort.geobreite}/${ort.geolaenge}|" target="_blank">Karte</a></th>
+                <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button></th> <!-- ohne type=button wird ein button in einem form element automatisch als type="submit" behandelt-->
+                <th><button type="button" th:attr="onclick='window.location.href=\'/ort/' + ${ort.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button></th> <!-- type_button verhindert das und macht den Button rein funktional(z.B. für JavaScript-Akrionen)-->
+            </tr>
+        </table>
 
-    <button th:attr="onclick='window.location.href=\'/ort/0\''" th:text="#{ortsliste.neu}"></button>
+    </div>
 
-    <footer>
-        <div th:replace="fragments/kopffuss :: fuss"></div>
-    </footer>
+        <button th:attr="onclick='window.location.href=\'/ort/0\''" th:text="#{ortsliste.neu}"></button>
+    
+        <footer class="footer-content">
+            <div th:replace="fragments/kopffuss :: fuss"></div>
+        </footer>
+    
     
 </body>
 </html>
