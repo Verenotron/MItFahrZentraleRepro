@@ -19,17 +19,19 @@
             <th th:text="#{tourliste.colhead.anbieter}"></th>
         </tr>
         <tr th:each="element : ${alleTouren}">
-            <th th:text="${alleTouren.id}"></th>
-            <th th:text="${alleTouren.abfahrDateTime}"></th>
-            <th th:text="${alleTouren.preis}"></th>
-            <th th:text="${alleTouren.plaetze}"></th>
-            <th th:text="${alleTouren.startOrt}"></th>
-            <th th:text="${alleTouren.zielOrt}"></th>
-            <th th:text="${alleTouren.anbieter}"></th>
+            <th th:text="${element.id}"></th>
+            <th th:text="${element.abfahrDateTime}"></th>
+            <th th:text="${element.preis}"></th>
+            <th th:text="${element.plaetze}"></th>
+            <th th:text="${element.startOrt.name}"></th>
+            <th th:text="${element.zielOrt.name}"></th>
+            <th th:text="${element.anbieter.name}"></th>
+            <th><button type="button" th:attr="onclick='window.location.href=\'/tour/' + ${element.id} + '\''" th:text="#{tourliste.eintrag.bearbeiten}"></button></th>
+            <th><button type="button" th:attr="onclick='window.location.href=\'/tour/' + ${element.id} + '/del\''" th:text="#{tourliste.eintrag.loeschen}"></button></th>
         </tr>
     </table>
 
-    <button th:text="tourliste.neu" th:attr="onclick='window.location.href=\'/tour/0\''"></button>
+    <button th:text="#{tourliste.neu}" th:attr="onclick='window.location.href=\'/tour/0\''"></button>
     
 </body>
 </html>

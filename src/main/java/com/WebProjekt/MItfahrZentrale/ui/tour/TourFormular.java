@@ -7,7 +7,6 @@ import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -42,6 +41,7 @@ public class TourFormular {
 
     private long startOrtId;
     private long zielOrtId; //Später wieder rausnehmen, falls es eine bessere Lösung gibt? 
+    private long anbieterId;
 
     public void toTour(Tour tour){
         tour.setId(this.id);
@@ -51,6 +51,7 @@ public class TourFormular {
         tour.setInfo(this.info);
         tour.setStartOrt(this.startOrt);
         tour.setZielOrt(this.zielOrt);
+        tour.setAnbieter(this.anbieter);
     }
 
     public void fromTour(Tour tour){
@@ -61,6 +62,7 @@ public class TourFormular {
         this.info = tour.getInfo();
         this.startOrt = tour.getStartOrt();
         this.zielOrt = tour.getZielOrt();
+        this.anbieter = tour.getAnbieter();
     }
 
     
@@ -153,6 +155,12 @@ public class TourFormular {
         this.zielOrt = zielOrt;
     }
 
-    
+    public long getAnbieterId() {
+        return anbieterId;
+    }
+
+    public void setAnbieterId(long anbieterId) {
+        this.anbieterId = anbieterId;
+    }
     
 }
