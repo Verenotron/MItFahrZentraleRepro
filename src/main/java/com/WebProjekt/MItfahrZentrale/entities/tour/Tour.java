@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Tour {
@@ -34,7 +35,7 @@ public class Tour {
     @Min(1)
     private int plaetze;
     
-    @Max(400)
+    @Size(max=400)
     private String info;
 
     @ManyToOne
@@ -47,6 +48,7 @@ public class Tour {
     @NotNull
     @ManyToOne
     private Ort zielOrt;
+
 
     public Ort getZielOrt() {
         return zielOrt;

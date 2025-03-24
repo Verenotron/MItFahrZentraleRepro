@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import com.WebProjekt.MItfahrZentrale.entities.ort.OrtRepository;
 

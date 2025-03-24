@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour bearbeiten</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+    <header>
+        <div th:replace="fragments/kopffuss :: kopf"></div>
+    </header>
+
+    <h1 th:if="${tourID} == 0" th:text="#{tourformular.titel.neu}"></h1>
+    <h1 th:if="${tourID} != 0" th:text="#{tourformular.titel(${tourID})}"></h1>
+
+    <form th:action="@{/submitTour}" method="post">
+
+        <label for="abfahrDateTime" th:text="#{tour.abfahrdatetime}"></label><br>
+        <input type="datetime-local" name="abfahrDateTime" th:value="${tourformular.abfahrDateTime}" th:classappend="${#fields.hasErrors('tourformular.abfahrDateTime')} ? 'error-border' : ''"><br>
+
+        <label for="preis" th:text="#{tour.preis}"></label><br>
+        <input type="text" name="preis" th:value="${tourformular.preis}" th:classappend="${#fields.hasErrors('tourformular.preis')} ? 'error-border' : ''"><br>
+
+        <label for="plaetze" th:text="#{tour.plaetze}"></label><br>
+        <input type="text" name="plaetze" th:value="${tourformular.plaetze}" th:classappend="${#fields.hasErrors('tourformular.plaetze')} ? 'error-border' : ''"><br>
+
+        <label for="tour" th:text="#{tour.fahrgastinfos}"></label><br>
+        <input type="text" name="info" th:value="${tourformular.info}" th:classappend="${#fields.hasErrors('tourformular.info')} ? 'error-border' : ''"><br>
+
+        <!--<label for="startOrt" th:text="#{tour.startort}"></label><br>
+        <input type="text" name="startOrt" th:value="${tourformular.startOrt}" th:classappend="${#fields.hasErrors('tourformular.startOrt')} ? 'error-border' : ''"><br>
+
+        <label for="zielOrt" th:text="#{tour.zielort}"></label><br>
+        <input type="text" name="zielOrt" th:value="${tourformular.zielOrt}" th:classappend="${#fields.hasErrors('tourformular.zielOrt')} ? 'error-border' : ''"><br>
+
+    -->
+
+        <label for="startort" th:text="#{tour.startort}"></label><br>
+        <select th:field="*{tourformular.startOrtId}" name="startOrtID" id="startort">
+            <option value="0">----</option>
+            <option th:each="item : ${ortListe}"
+                    th:value="${item.id}" 
+                    th:text="${item.name}"
+                    th:classappend="${#fields.hasErrors('tourformular.startOrt')} ? 'error-border' : ''"></option>
+        </select>
+
+        <br>
+
+        <label  for="zielOrt" th:text="#{tour.zielort}"></label><br>
+        <select th:field="*{tourformular.zielOrtId}" name="zielOrtID" id="zielOrt">
+            <option value="0">----</option>
+            <option th:each="item : ${ortListe}" 
+                    th:value="${item.id}" 
+                    th:text="${item.name}"
+                    th:classappend="${#fields.hasErrors('tourformular.zielOrt')} ? 'error-border' : ''"></option>
+        </select>
+
+        <button type="submit">OK</button>
+
+    </form>
+
+    <footer>
+        <div th:replace="fragments/kopffuss :: fuss"></div>
+    </footer>
+    
+</body>
+</html>

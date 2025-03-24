@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 th:text="#{tourliste.titel}"></h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{tourliste.colhead.Abfahrtzeitpunkt}"></th>
+            <th th:text="#{tourliste.colhead.preis}"></th>
+            <th th:text="#{tourliste.colhead.plaetze}"></th>
+            <th th:text="#{tourliste.colhead.startort}"></th>
+            <th th:text="#{tourliste.colhead.zielort}"></th>
+            <th th:text="#{tourliste.colhead.anbieter}"></th>
+        </tr>
+        <tr th:each="element : ${alleTouren}">
+            <th th:text="${alleTouren.id}"></th>
+            <th th:text="${alleTouren.abfahrDateTime}"></th>
+            <th th:text="${alleTouren.preis}"></th>
+            <th th:text="${alleTouren.plaetze}"></th>
+            <th th:text="${alleTouren.startOrt}"></th>
+            <th th:text="${alleTouren.zielOrt}"></th>
+            <th th:text="${alleTouren.anbieter}"></th>
+        </tr>
+    </table>
+
+    <button th:text="tourliste.neu" th:attr="onclick='window.location.href=\'/tour/0\''"></button>
+    
+</body>
+</html>

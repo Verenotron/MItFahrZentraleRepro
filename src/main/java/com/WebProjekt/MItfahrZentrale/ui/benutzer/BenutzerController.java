@@ -47,11 +47,11 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
     public String postBenutzerDaten(@Valid @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //Spring befüllt benutzerFormular mit daten aus der View automatisch. Keine explizite Zuweisung nötig mit benutzerFormular.setName(name); man braucht das th_value in input feld, damit werte gezogen werden können
     //@Calid aktiviert die Validierungsüberprüfung im benutzerFormular
                                     BindingResult result,
-                                    Locale locale,
+                                    //Locale locale,
                                     Model model){
 
         model.addAttribute("maxWunsch", maxWunsch);
-        model.addAttribute("sprache", locale.getDisplayLanguage());
+        //model.addAttribute("sprache", locale.getDisplayLanguage());
 
         Benutzer benutzer = new Benutzer();
         benutzerFormular.toBenutzer(benutzer);
