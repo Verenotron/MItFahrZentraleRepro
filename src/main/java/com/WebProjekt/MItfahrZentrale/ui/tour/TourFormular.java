@@ -17,6 +17,7 @@ public class TourFormular {
     private long id;
     private long version;
 
+    @NotNull
     private LocalDateTime abfahrDateTime;
 
     @PositiveOrZero
@@ -29,14 +30,15 @@ public class TourFormular {
     private String info;
 
     @ManyToOne
+    @NotNull
     private Benutzer anbieter;
 
-    @NotNull
     @ManyToOne
+    @NotNull
     private Ort startOrt;
 
-    @NotNull
     @ManyToOne
+    @NotNull
     private Ort zielOrt;
 
     private long startOrtId;

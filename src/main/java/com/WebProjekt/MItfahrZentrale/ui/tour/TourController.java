@@ -63,6 +63,7 @@ public class TourController {
                                     SessionStatus sessionStatus){
 
         if(result.hasErrors()){
+            model.addAttribute("tourID", 0); //Damit "neue Tour" als Überschrift gewählt wird.
             return "tourbearbeiten";
         }
 
@@ -103,15 +104,20 @@ public class TourController {
 
     @PostMapping("/submitTour") //ruft validiere auf, da die Validation nach dem heraussuchen der Ort Objekte stattfinden muss(String != Obj)
     public String submitTour(@ModelAttribute("tourformular") TourFormular tourFormular,
+                            BindingResult result,
                             Model model){
-        
-        Ort startOrt = ortService.holeOrtMitId(tourFormular.getStartOrtId()).orElseThrow(() -> new RuntimeException("Ort nicht gefunden"));
-        Ort zielOrt = ortService.holeOrtMitId(tourFormular.getZielOrtId()).orElseThrow(() -> new RuntimeException("Ort nicht gefunden"));
-        Benutzer benutzer = benutzerService.holeBenutzerMitId(tourFormular.getAnbieterId()).orElseThrow(() -> new RuntimeException("Benutzer (Anbieter) nicht gefunden"));
 
-        tourFormular.setStartOrt(startOrt);
-        tourFormular.setZielOrt(zielOrt);
-        tourFormular.setAnbieter(benutzer);
+        try{
+            Ort startOrt = ortService.holeOrtMitId(tourFormular.getStartOrtId()).orElseThrow(() -> new RuntimeException("Ort nicht gefunden"));
+            Ort zielOrt = ortService.holeOrtMitId(tourFormular.getZielOrtId()).orElseThrow(() -> new RuntimeException("Ort nicht gefunden"));
+            Benutzer benutzer = benutzerService.holeBenutzerMitId(tourFormular.getAnbieterId()).orElseThrow(() -> new RuntimeException("Benutzer (Anbieter) nicht gefunden"));
+            tourFormular.setStartOrt(startOrt);
+            tourFormular.setZielOrt(zielOrt);
+            tourFormular.setAnbieter(benutzer);
+        }catch(Exception e){
+            model.addAttribute("info", e.getMessage());
+            logger.error(e.getMessage());
+        }
 
         return "redirect:/validiere";
     }

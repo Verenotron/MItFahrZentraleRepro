@@ -5,7 +5,7 @@ import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 public class OrtFormular {
 
@@ -15,7 +15,7 @@ public class OrtFormular {
 
     private long version;
 
-    @NotNull
+    @NotEmpty // oder notBlank, falls Leerzeichen ignotriert werden sollen.
     private String name;
     
     private double geobreite;

@@ -19,47 +19,54 @@
     <form th:action="@{/submitTour}" method="post">
 
         <label for="anbieter" th:text="#{tourliste.colhead.anbieter}"></label><br>
-        <select th:field="*{tourformular.anbieterId}" name="anbieterId" id="anbieter">
+        <select th:field="*{tourformular.anbieterId}" name="anbieterId" id="anbieter" th:classappend="${#fields.hasErrors('tourformular.anbieter')} ? 'error-border' : ''">
+            <option value="0">----</option>
             <option th:each="item : ${anbieterListe}"
                     th:value="${item.id}"
                     th:selected="${item.id == tourformular.anbieterId}"
-                    th:text="${item.name}"
-                    th:classappend="${#fields.hasErrors('tourformular.anbieter')} ? 'error-border' : ''"></option>
+                    th:text="${item.name}"></option>
         </select>
+        <div th:if="${#fields.hasErrors('tourformular.anbieter')}" th:errors="*{tourformular.anbieter}" class="error-text"></div>
 
         <br>
 
         <label for="abfahrDateTime" th:text="#{tour.abfahrdatetime}"></label><br>
         <input type="datetime-local" name="abfahrDateTime" th:value="${tourformular.abfahrDateTime}" th:classappend="${#fields.hasErrors('tourformular.abfahrDateTime')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('tourformular.abfahrDateTime')}" th:errors="*{tourformular.abfahrDateTime}" class="error-text"></div>
 
         <label for="preis" th:text="#{tour.preis}"></label><br>
-        <input type="text" name="preis" th:value="${tourformular.preis}" th:classappend="${#fields.hasErrors('tourformular.preis')} ? 'error-border' : ''"><br>
+        <input type="number" name="preis" th:value="${tourformular.preis}" th:classappend="${#fields.hasErrors('tourformular.preis')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('tourformular.preis')}" th:errors="*{tourformular.preis}" class="error-text"></div>
 
         <label for="plaetze" th:text="#{tour.plaetze}"></label><br>
-        <input type="text" name="plaetze" th:value="${tourformular.plaetze}" th:classappend="${#fields.hasErrors('tourformular.plaetze')} ? 'error-border' : ''"><br>
+        <input type="number" name="plaetze" th:value="${tourformular.plaetze}" th:classappend="${#fields.hasErrors('tourformular.plaetze')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('tourformular.plaetze')}" th:errors="*{tourformular.plaetze}" class="error-text"></div>
 
         <label for="tour" th:text="#{tour.fahrgastinfos}"></label><br>
         <input type="text" name="info" th:value="${tourformular.info}" th:classappend="${#fields.hasErrors('tourformular.info')} ? 'error-border' : ''"><br>
+        <div th:if="${#fields.hasErrors('tourformular.info')}" th:errors="*{tourformular.info}" class="error-text"></div>
 
         <label for="startort" th:text="#{tour.startort}"></label><br>
-        <select th:field="*{tourformular.startOrtId}" name="startOrtID" id="startort">
+        <select th:field="*{tourformular.startOrtId}" name="startOrtID" id="startort" th:classappend="${#fields.hasErrors('tourformular.startOrt')} ? 'error-border' : ''">
+            <option value="0">----</option>
             <option th:each="item : ${ortListe}"
                     th:value="${item.id}" 
                     th:selected="${item.id == tourformular.startOrtId}"
-                    th:text="${item.name}"
-                    th:classappend="${#fields.hasErrors('tourformular.startOrt')} ? 'error-border' : ''"></option>
+                    th:text="${item.name}"></option>
         </select>
+        <div th:if="${#fields.hasErrors('tourformular.startOrt')}" th:errors="*{tourformular.startOrt}" class="error-text"></div>
 
         <br>
 
         <label  for="zielOrt" th:text="#{tour.zielort}"></label><br>
-        <select th:field="*{tourformular.zielOrtId}" name="zielOrtID" id="zielOrt">
+        <select th:field="*{tourformular.zielOrtId}" name="zielOrtID" id="zielOrt" th:classappend="${#fields.hasErrors('tourformular.zielOrt')} ? 'error-border' : ''">
+            <option value="0">----</option>
             <option th:each="item : ${ortListe}" 
                     th:value="${item.id}" 
                     th:selected="${item.id == tourformular.zielOrtId}"
-                    th:text="${item.name}"
-                    th:classappend="${#fields.hasErrors('tourformular.zielOrt')} ? 'error-border' : ''"></option>
+                    th:text="${item.name}"></option>
         </select>
+        <div th:if="${#fields.hasErrors('tourformular.zielOrt')}" th:errors="*{tourformular.zielOrt}" class="error-text"></div>
 
         <br>
 
