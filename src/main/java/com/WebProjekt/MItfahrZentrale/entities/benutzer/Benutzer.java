@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 import com.WebProjekt.MItfahrZentrale.validators.Passwort;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,7 +57,7 @@ public class Benutzer {
     @ElementCollection
     private Set<String> magNicht = new HashSet<String>();
 
-    @OneToMany
+    @OneToMany(mappedBy="anbieter", cascade = CascadeType.REMOVE) //Wenn der Benutzer gelöscht wird, werden auh seine angebotenen Touren gelöscht
     private List<Tour> angeboteneTouren = new LinkedList<Tour>();
 
     public String getName() {
