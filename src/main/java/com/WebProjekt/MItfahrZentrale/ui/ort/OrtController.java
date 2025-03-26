@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import com.WebProjekt.MItfahrZentrale.services.ort.OrtServiceImpl;
@@ -53,6 +54,7 @@ public class OrtController {
                 ort = vorgeschlageneOrteVonAPI.get(0);
                 model.addAttribute("ortID", 0);
                 ortFormular.fromOrt(ort);
+                model.addAttribute("info", "Wichtig: Koordinaten bestätigen oder ändern.");
                 return "ortbearbeiten";
             }
             ort = ortService.speichereOrt(ort);
@@ -72,10 +74,15 @@ public class OrtController {
     }
 
     @GetMapping("/ort/{n}/del")
-    public String loescheOrt(@PathVariable int n){
-
-        ortService.loescheOrtMitId(n);
-
+    public String loescheOrt(@PathVariable int n,
+                                RedirectAttributes redirectAttribute, //Attribut bleibt nur für nächste Anfrage verfügbar.
+                                Model model){
+        try{
+            ortService.loescheOrtMitId(n);
+        }catch(Exception e){
+            redirectAttribute.addFlashAttribute("info", "Ort wird für eine Tour benötigt.");
+            logger.error(e.getMessage());
+        }
         return "redirect:/ort";
     }
 
