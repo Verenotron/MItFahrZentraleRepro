@@ -48,6 +48,13 @@ public class OrtController {
         ortFormular.toOrt(ort);
 
         if(ortFormular.getId() == 0){
+            if(ortFormular.getGeobreite() == 0 && ortFormular.getGeolaenge() == 0){
+                List<Ort> vorgeschlageneOrteVonAPI = ortService.findeOrtsvorschlaegeFuerAdresse(ortFormular.getName());
+                ort = vorgeschlageneOrteVonAPI.get(0);
+                model.addAttribute("ortID", 0);
+                ortFormular.fromOrt(ort);
+                return "ortbearbeiten";
+            }
             ort = ortService.speichereOrt(ort);
         }else{
             try{

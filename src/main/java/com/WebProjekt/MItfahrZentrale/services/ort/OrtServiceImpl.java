@@ -1,5 +1,6 @@
 package com.WebProjekt.MItfahrZentrale.services.ort;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,14 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import com.WebProjekt.MItfahrZentrale.entities.ort.OrtRepository;
+import com.WebProjekt.MItfahrZentrale.services.geo.GeoAdresse;
+import com.WebProjekt.MItfahrZentrale.services.geo.GeoServiceImpl;
 
 @Service
 public class OrtServiceImpl implements OrtService{
     
     private OrtRepository ortRepository;
+    private GeoServiceImpl geoService;
 
-    public OrtServiceImpl(@Autowired OrtRepository ortRepository){
+    public OrtServiceImpl(@Autowired OrtRepository ortRepository, @Autowired GeoServiceImpl geoService){
         this.ortRepository = ortRepository;
+        this.geoService = geoService;
     }
 
     @Override
@@ -47,6 +52,28 @@ public class OrtServiceImpl implements OrtService{
             return ortRepository.save(existingOrt); 
         })
         .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+    }
+
+    @Override
+    public List<Ort> findeOrtsvorschlaegeFuerAdresse(String ort) {
+
+        List<GeoAdresse> geoAdressen = geoService.findeAdressen(ort);
+        List<Ort> orte = new LinkedList<Ort>();
+
+        Ort nextOrt = new Ort();
+
+        if(geoAdressen.size() == 0){
+            return orte;
+        }
+
+        for(GeoAdresse currAdr : geoAdressen){
+            nextOrt.setName(currAdr.name());
+            nextOrt.setGeolaenge(currAdr.lon());
+            nextOrt.setGeobreite(currAdr.lat());
+            orte.add(nextOrt);
+        }
+
+        return orte;
     }
     
 }
