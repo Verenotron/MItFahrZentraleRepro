@@ -165,14 +165,6 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
                                 @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
                                 Model model){
 
-        // Benutzer benutzer = benutzerService.holeBenutzerMitId(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("Benutzer nicht in Datenbank vorhanden"));
-        // benutzerFormular.fromBenutzer(benutzer);
-        // switch(fieldName){
-        //     case "namensfeld":
-        //     benutzerFormular.setName(variable);
-        //     break;
-        // }
-
         Benutzer benutzer = benutzerService.holeBenutzerMitId(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
         benutzerFormular.fromBenutzer(benutzer);
         model.addAttribute("benutzerFormular", benutzerFormular);
@@ -200,6 +192,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
 
         Benutzer benutzer = new Benutzer();
         benutzerFormular.toBenutzer(benutzer);
+        
         switch(feldName){
             case "namensfeld":
             benutzerFormular.setName(wert);
@@ -207,14 +200,40 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
             case "emailfeld":
             benutzerFormular.seteMail(wert);
         }
-        benutzerFormular.toBenutzer(benutzer);
-        benutzerService.aktualisiereBenutzer(benutzer);
-        benutzerFormular.fromBenutzer(benutzer);
+        try{
+            benutzerFormular.toBenutzer(benutzer);
+            benutzerService.aktualisiereBenutzer(benutzer);
+            benutzerFormular.fromBenutzer(benutzer);
+        }catch(Exception e){
+
+            benutzer = benutzerService.holeBenutzerMitId(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            benutzerFormular.fromBenutzer(benutzer);
+            switch(feldName){
+                case "namensfeld":
+                    wert = benutzerFormular.getName();
+                break;
+                case "emailfeld":
+                    wert = benutzerFormular.geteMail();
+                break;
+            }
+
+            model.addAttribute("benutzerFormular", benutzerFormular);
+            model.addAttribute("feldname", feldName);
+            model.addAttribute("benutzerid", id);
+            model.addAttribute("benutzer", benutzer);
+            model.addAttribute("wert", wert);
+
+            model.addAttribute("info", e.getMessage());
+
+            return "fragments/benutzer-zeile :: feldbearbeiten";
+        }
+        
 
         model.addAttribute("benutzerFormular", benutzerFormular);
-        model.addAttribute("benutzerID", id);
+        model.addAttribute("benutzerid", id);
         model.addAttribute("benutzer", benutzer);
         model.addAttribute("wert", wert);
+        model.addAttribute("feldname", feldName);
 
         return "fragments/benutzer-zeile :: feldausgeben";
     }

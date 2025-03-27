@@ -1,7 +1,7 @@
 <th:block th:fragment="feldausgeben(benutzerid, feldname, wert)">
     <td>
         <span th:name="feldausgeben" th:text="${wert}"
-        th:hx-get="@{/hx/{benutzerid}/{feldname}(benutzerid=${benutzer.id}, feldname=${feldname})}"
+        th:hx-get="@{/hx/{benutzerid}/{feldname}(benutzerid=${benutzerid}, feldname=${feldname})}"
         hx-target="closest td"
         hx-swap="outerHTML"
         hx-trigger="click"
@@ -11,8 +11,9 @@
 
 <th:block th:fragment="feldbearbeiten(benutzerid, feldname, wert)">
     <td>
-        <form action="@{/benutzer}">
+        <form>
             <input th:value="${wert}" name="wert" type="text">
+            <div th:if="${info}" th:text="Fehlermeldung" class="error-text"></div>
             <button
             th:hx-put="@{/hx/{benutzerid}/{feldname}(benutzerid=${benutzerid}, feldname=${feldname})}"
             hx-target="closest td"
