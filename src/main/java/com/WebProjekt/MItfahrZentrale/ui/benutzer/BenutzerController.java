@@ -3,6 +3,7 @@ package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 
@@ -155,4 +159,63 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         return "benutzerbearbeiten";
     }
 
+    @GetMapping("/hx/{benutzerId}/{feldName}")
+    public String feldBearbeiten(@PathVariable("benutzerId") String id,
+                                @PathVariable("feldName") String fieldName,
+                                @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
+                                Model model){
+
+        // Benutzer benutzer = benutzerService.holeBenutzerMitId(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("Benutzer nicht in Datenbank vorhanden"));
+        // benutzerFormular.fromBenutzer(benutzer);
+        // switch(fieldName){
+        //     case "namensfeld":
+        //     benutzerFormular.setName(variable);
+        //     break;
+        // }
+
+        Benutzer benutzer = benutzerService.holeBenutzerMitId(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+        benutzerFormular.fromBenutzer(benutzer);
+        model.addAttribute("benutzerFormular", benutzerFormular);
+        
+        model.addAttribute("benutzerid", id);
+        model.addAttribute("feldname", fieldName);
+        if(fieldName.equals("namensfeld")){
+            model.addAttribute("wert", benutzerFormular.getName());
+        }else if(fieldName.equals("emailfeld")){
+            model.addAttribute("wert", benutzerFormular.geteMail());
+        }else{
+            logger.error("HTMx Problem: Es koennen nur die Felder email und name durch HTMX verarbeitet werden.");
+        }
+        
+
+        return "fragments/benutzer-zeile :: feldbearbeiten";
+    }
+
+    @PutMapping("/hx/{benutzerId}/{feldName}")
+    public String feldAendern(@PathVariable("benutzerId") String id, //als ich die ID hier unten im model gespeicht habe statt die aus dem BenutzerFormular hats plötzlich funktioniert...
+                            @PathVariable("feldName") String feldName,
+                            @ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular,
+                            @RequestParam("wert") String wert,
+                            Model model){
+
+        Benutzer benutzer = new Benutzer();
+        benutzerFormular.toBenutzer(benutzer);
+        switch(feldName){
+            case "namensfeld":
+            benutzerFormular.setName(wert);
+            break;
+            case "emailfeld":
+            benutzerFormular.seteMail(wert);
+        }
+        benutzerFormular.toBenutzer(benutzer);
+        benutzerService.aktualisiereBenutzer(benutzer);
+        benutzerFormular.fromBenutzer(benutzer);
+
+        model.addAttribute("benutzerFormular", benutzerFormular);
+        model.addAttribute("benutzerID", id);
+        model.addAttribute("benutzer", benutzer);
+        model.addAttribute("wert", wert);
+
+        return "fragments/benutzer-zeile :: feldausgeben";
+    }
 }

@@ -1,0 +1,29 @@
+<th:block th:fragment="feldausgeben(benutzerid, feldname, wert)">
+    <td>
+        <span th:name="feldausgeben" th:text="${wert}"
+        th:hx-get="@{/hx/{benutzerid}/{feldname}(benutzerid=${benutzer.id}, feldname=${feldname})}"
+        hx-target="closest td"
+        hx-swap="outerHTML"
+        hx-trigger="click"
+        ></span> 
+    </td>
+</th:block>
+
+<th:block th:fragment="feldbearbeiten(benutzerid, feldname, wert)">
+    <td>
+        <form action="@{/benutzer}">
+            <input th:value="${wert}" name="wert" type="text">
+            <button
+            th:hx-put="@{/hx/{benutzerid}/{feldname}(benutzerid=${benutzerid}, feldname=${feldname})}"
+            hx-target="closest td"
+            hx-swap="outerHTML"
+            hx-trigger="click"
+            type="button"
+            >OK</button>
+        </form> 
+    </td>
+</th:block>
+
+<!--th:block ist ein Container-tag in Thymeleaf, das keine eigene HTML-Ausgebe erzeigt.
+Dient dazu, logische Gruppeirungen vorzunehmen, z.B. für Fragmente oder bedingte Anweisungen.
+Sinnvoll, wenn man kein zusätzliches HTML erzeugen möchte-->
