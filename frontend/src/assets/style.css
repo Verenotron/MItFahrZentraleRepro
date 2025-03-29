@@ -23,6 +23,43 @@ html, body{
     background-color: #ffe6e6;
 }
 
+.info-box{
+    background-color: #ffe6e6;
+    border-radius: 8px; /*Für rundere Ecken*/
+    max-width: 300px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.infobox-header{
+    display: flex;
+    justify-content:space-between; /*Möglichst großer Abstand zwischen den Kind-Elementen*/
+    align-items: center; /*Vertikal mittige ausrichtung der Kind-Elemente*/
+    font-weight: bold;
+    font-family: Corbel, Arial, sans-serif;
+    background-color: #cf4949;
+    color: #fff;
+    padding: 5px 15px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.infobox-content{
+    padding: 10px;
+    color: #333;
+    font-family: Corbel, Arial, sans-serif;
+}
+
+
 .error-box{
     background-color: #ffe6e6;
     border-left: 5px red;

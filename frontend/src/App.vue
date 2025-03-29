@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const info = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(dh. man kann den Wert per UI ändern und Vue bemerkt das). Mit info.value kann man auf den String zugreifen.
+
+</script>
 
 <template>
    <header class="kopf">
@@ -16,11 +20,15 @@
             </div>            
             
         </nav>
-
-        <!-- <p class="error-border" th:if="${info}" th:text="${info}"></p> -->
         
     </header>
 
+    <div v-if="info" class="info-box">
+        <div class="infobox-header">Obacht! <button @click="info = ''" class="close-btn">x</button></div> 
+        <div class="infobox-content">{{ info  }}</div>
+    </div>
+    <button @click="info='Dies ist eine Nachricht'">Hallo</button>
+    
     <footer class="footer-content">
         <nav>
             <a class="text" href="#">Imressum</a>
