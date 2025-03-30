@@ -6,7 +6,7 @@
         <td>{{tour.nach}}</td>
         <td>{{tour.entfernung}}</td>
         <td>{{tour.plaetze}}</td>
-        <td>{{tour.frei}}</td>
+        <td>{{frei}}</td>
         <td>{{tour.preis}}</td>
         <td class="noBorderElement"> <button>Details</button></td>
     </tr>
@@ -14,8 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
 import type { ITourDTD } from '@/stores/ITourDTD'
+
+const frei = computed(() => props.tour.plaetze - props.tour.buchungen)
 
 const props = defineProps<{
   tour: ITourDTD

@@ -5,6 +5,6 @@ export interface ITourDTD{
     nach: String
     entfernung: number
     plaetze: number
-    frei: number
     preis: number
+    buchungen: number
 }

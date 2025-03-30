@@ -18,8 +18,8 @@ const touren = ref<ITourDTD[]>([
     nach: 'München', 
     entfernung: 585, 
     plaetze: 20, 
-    frei: 15, 
-    preis: 29 
+    buchungen: 15,
+    preis: 29
   },
   { 
     id: 2, 
@@ -28,7 +28,7 @@ const touren = ref<ITourDTD[]>([
     nach: 'Köln', 
     entfernung: 360, 
     plaetze: 25, 
-    frei: 10, 
+    buchungen: 10, 
     preis: 35 
   },
   { 
@@ -38,7 +38,7 @@ const touren = ref<ITourDTD[]>([
     nach: 'Stuttgart', 
     entfernung: 210, 
     plaetze: 18, 
-    frei: 5, 
+    buchungen: 5, 
     preis: 22 
   }
 ])
