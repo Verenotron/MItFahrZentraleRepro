@@ -1,13 +1,11 @@
 <template>
 
-    <thead> <!--thead definiet Kopfbeeich einer Tabelle-->
-        <tr>
-            <th>{{tour.id}}</th>
-            <th>{{tour.name}}</th>
-            <th>{{tour.description}}</th>
-            <th>{{tour.price}}</th>
-        </tr>
-    </thead>
+    <tr>
+        <td>{{tour.id}}</td>
+        <td>{{tour.name}}</td>
+        <td>{{tour.description}}</td>
+        <td>{{tour.price}}</td>
+    </tr>
 
 </template>
 
