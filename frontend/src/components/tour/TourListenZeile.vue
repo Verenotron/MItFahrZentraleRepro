@@ -5,6 +5,7 @@
         <td>{{tour.name}}</td>
         <td>{{tour.description}}</td>
         <td>{{tour.price}}</td>
+        <td class="noBorderElement"> <button>Details</button></td>
     </tr>
 
 </template>
@@ -20,3 +21,6 @@ const props = defineProps<{
 console.log("Daten :: " , props.tour)
 
 </script>
+<style scoped>
+@import './../../assets/style.css';
+</style>

@@ -1,18 +1,21 @@
 <template>
 <h1>Das aktuelle Mitfahrangebot</h1>
-<table>
-    <thead>
-        <tr>
-            <th>TourID</th>
-            <th>TourName</th>
-            <th>TourDescription</th>
-            <th>TourPrice</th>
-        </tr>
-    </thead>
-    <tbody>
-        <TourListenZeile v-for="tour in touren" :key="tour.id" :tour="tour" />
-    </tbody>
-</table>
+
+<div class="main-content">
+    <table>
+        <thead>
+            <tr>
+                <th>TourID</th>
+                <th>TourName</th>
+                <th>TourDescription</th>
+                <th>TourPrice</th>
+            </tr>
+        </thead>
+        <tbody>
+            <TourListenZeile v-for="tour in touren" :key="tour.id" :tour="tour" />
+        </tbody>
+    </table>
+</div>
 
 </template>
 
@@ -27,3 +30,7 @@ defineProps<{
 }>()
 
 </script>
+
+<style scoped>
+@import './../../assets/style.css';
+</style>

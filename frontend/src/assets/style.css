@@ -7,10 +7,22 @@ html, body{
 .main-content{
     position: relative; /*min-height funktioniert nicht ohne position relative*/
     min-height: 300px;
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+}
+
+.noBorderElement{
+    border: none;
+}
+
+table{
+    border-collapse: collapse; /* Damit die borders zwischen den einzelnen td und th nicht gestückelt sind.*/
+}
+th, td{
+    text-align: left;
+    border-bottom: 1px solid #333;
 }
 
 .error-text {
