@@ -1,10 +1,13 @@
 <template>
 
     <tr>
-        <td>{{tour.id}}</td>
-        <td>{{tour.name}}</td>
-        <td>{{tour.description}}</td>
-        <td>{{tour.price}}</td>
+        <td>{{tour.abfahrt}}</td>
+        <td>{{tour.von}}</td>
+        <td>{{tour.nach}}</td>
+        <td>{{tour.entfernung}}</td>
+        <td>{{tour.plaetze}}</td>
+        <td>{{tour.frei}}</td>
+        <td>{{tour.preis}}</td>
         <td class="noBorderElement"> <button>Details</button></td>
     </tr>
 

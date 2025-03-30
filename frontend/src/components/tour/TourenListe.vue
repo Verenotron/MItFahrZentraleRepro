@@ -5,10 +5,13 @@
     <table>
         <thead>
             <tr>
-                <th>TourID</th>
-                <th>TourName</th>
-                <th>TourDescription</th>
-                <th>TourPrice</th>
+                <th>Abfahrt</th>
+                <th>von</th>
+                <th>nach</th>
+                <th>Entfernung</th>
+                <th>Plätze</th>
+                <th>Frei</th>
+                <th>Preis</th>
             </tr>
         </thead>
         <tbody>
