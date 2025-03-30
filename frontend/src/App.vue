@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+//import TourListe from './components/tour/TourenListe.vue'
+import TourenListeView from './views/TourenListeView.vue'
 const info = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(dh. man kann den Wert per UI ändern und Vue bemerkt das). Mit info.value kann man auf den String zugreifen.
 
 </script>
@@ -28,6 +30,8 @@ const info = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(
         <div class="infobox-content">{{ info  }}</div>
     </div>
     <button @click="info='Dies ist eine Nachricht'">Hallo</button>
+
+    <TourenListeView></TourenListeView>
     
     <footer class="footer-content">
         <nav>
@@ -40,3 +44,4 @@ const info = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(
 <style scoped>
 @import './assets/style.css';
 </style>
+
