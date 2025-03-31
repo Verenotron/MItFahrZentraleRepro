@@ -6,7 +6,6 @@ import { useInfo } from './composables/useInfo.ts'
 import { RouterView } from 'vue-router'
 const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
 
-
 //const info2 = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(dh. man kann den Wert per UI ändern und Vue bemerkt das). Mit info.value kann man auf den String zugreifen.
 
 </script>
@@ -17,7 +16,7 @@ const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufe
             <div class="div-header">
                 <a class="text" href="@{/benutzer}">Benutzer</a>
                 <a class="text" href="@{/ort}">Orte</a>
-                <RouterLink to="/touren">Touren</RouterLink>
+                <RouterLink class="text" to="/touren">Touren</RouterLink>
             </div>
             <div class="div-header">
                 <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>

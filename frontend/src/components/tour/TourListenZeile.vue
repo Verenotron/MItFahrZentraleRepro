@@ -30,6 +30,7 @@ const props = defineProps<{
 
 console.log("Daten :: " , props.tour)
 
+
 function details() {
   router.push({ path: `/tour/${props.tour.id}` }) //navigiert zur TourView.vue
 }
