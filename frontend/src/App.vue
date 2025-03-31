@@ -3,7 +3,7 @@ import { ref } from 'vue'
 //import TourListe from './components/tour/TourenListe.vue'
 import TourenListeView from './views/TourenListeView.vue'
 import { useInfo } from './composables/useInfo.ts'
-const {info, loescheInfo, setzeInfo} = useInfo()
+const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
 
 //const info2 = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(dh. man kann den Wert per UI ändern und Vue bemerkt das). Mit info.value kann man auf den String zugreifen.
 
