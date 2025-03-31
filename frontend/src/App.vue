@@ -17,7 +17,7 @@ const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufe
             <div class="div-header">
                 <a class="text" href="@{/benutzer}">Benutzer</a>
                 <a class="text" href="@{/ort}">Orte</a>
-                <a class="text" href="@{/tour}">Touren</a>
+                <RouterLink to="/touren">Touren</RouterLink>
             </div>
             <div class="div-header">
                 <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
@@ -38,7 +38,6 @@ const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufe
         <div class="infobox-content">{{ info }}</div>
     </div>
     <button @click="setzeInfo('Dies ist eine Nachricht.')">Hallo</button>
-        <RouterLink to="/touren">Tourenliste</RouterLink>
         <RouterLink to="'/tour/${tourid}'">Beispiel-Tour</RouterLink>
 
     <!-- <TourenListeView></TourenListeView> -->

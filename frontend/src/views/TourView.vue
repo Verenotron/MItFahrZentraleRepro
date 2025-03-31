@@ -18,7 +18,7 @@
   const tourenStore = useTourenStore()
   tourenStore.updateTourListe() 
   
-  const tourid = computed(() => Number(route.params.tourid))
+  const tourid = computed(() => Number(route.params.tourid)) //route Params enthält die übergebenen Parameter(${tourid})
   const tour = computed(() => tourenStore.tourdata.tourliste.find(t => t.id === tourid.value))
   </script>
   
