@@ -5,7 +5,8 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup lang="ts"> //Scipt setup ist eine spezielle synt in vue3, die den Composition API-Code vereinfacht. 
+// Es entfernt die default export Strukturund macht Variablen, Props und Funktionen automatisch verfügbar.
 import type { ITourDTD } from '@/stores/ITourDTD'
 import TourenListe from './../components/tour/TourenListe.vue'
 import { ref } from 'vue'

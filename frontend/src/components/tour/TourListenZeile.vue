@@ -13,11 +13,12 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"> //Script setup braucht keinen Default-Export, da die Datei automatisch als Komponente registriert wird.
 import { defineProps, computed } from 'vue'
 import type { ITourDTD } from '@/stores/ITourDTD'
 
-const frei = computed(() => props.tour.plaetze - props.tour.buchungen)
+const frei = computed(() => props.tour.plaetze - props.tour.buchungen) //computed erstellt einen reaktiven Wert (Funktion aus der Vue Composition API). 
+//Differenz wird neu berechnet, sobald sich plaetze oder buchungen ändern. Verhält sich wie ein reaktiver Listener. 
 
 const props = defineProps<{
   tour: ITourDTD
