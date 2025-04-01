@@ -10,7 +10,6 @@
         <td>{{tour.preis}}</td>
         <td class="noBorderElement"> 
         <button v-on:click="details">Details</button>
-          
         </td>
     </tr>
 

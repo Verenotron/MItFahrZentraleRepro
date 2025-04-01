@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <TourListenZeile v-for="tour in touren" :key="tour.id" :tour="tour" />
+            <TourListenZeile v-for="tour in touren" :tour="tour" />
         </tbody>
     </table>
 </div>
@@ -32,8 +32,8 @@ import type { ITourDTD } from '@/stores/ITourDTD' //Import einen Typ ITourDTD. W
 //Ohne geschweifte Klammern importiert man einen Default-Export einer Datei
 
 defineProps<{ //Vue-Composition API-Funktion, die Props in einer script setup Datei definiert. 
-  touren: ITourDTD[] //Props sind Daten, die von Eltern zu Kindkompnenten weitergegeben werden. Eingabewerte einer Kompoente
-}>()
+  touren: ITourDTD[] //Props sind Daten, die von Eltern zu Kindkompnenten weitergegeben werden. Eingabewerte einer Kompoente. Müssen explizit so defiiert werden.
+}>()//Hier werden Daten des Elternelemets empfangen.
 
 </script>
 

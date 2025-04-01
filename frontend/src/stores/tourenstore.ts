@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import type { ITourDTD } from './ITourDTD'
 
 export const useTourenStore = defineStore('useTourenStore', { //Definiere store als tourenstore
-    state: () => ({
-        tourdata: { //tourdata ist reaktives Objekt, das ok und tourliste bereitstellt
+    state: () => ({ //state enthält reaktive Daten, die innerhalb des Stores verwaltet werden.
+        tourdata: { //tourdata ist reaktives Objekt, das ok und tourliste bereitstellt. Soblad sich ok und tourListe ändern, ändert sich tourdata ud damit die UI
             ok: true,
             tourliste: [] as Array<ITourDTD>
         }
     }),
-    actions:{ //action befüllt tourliste mit Daten
+    actions:{ //actions enthält Funktionen, die state manipulieren oder Daten ändern. (hier befüllt action tourliste mit Daten.)
         updateTourListe(){
             this.tourdata.tourliste = [
                 { 

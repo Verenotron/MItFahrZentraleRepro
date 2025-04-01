@@ -1,9 +1,6 @@
 package com.WebProjekt.MItfahrZentrale.ui.tour;
 
 import java.util.List;
-import java.util.Locale;
-
-import javax.management.RuntimeErrorException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

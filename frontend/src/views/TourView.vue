@@ -14,14 +14,15 @@
   import { useTourenStore } from '@/stores/tourenstore'
   import { useInfo,  } from './../composables/useInfo.ts'
   
-  const {info, loescheInfo, setzeInfo} = useInfo()
+  const { setzeInfo } = useInfo()
   const route = useRoute()
   console.log(route)
-  const tourenStore = useTourenStore()
-  tourenStore.updateTourListe() 
+  const { updateTourListe, tourdata } = useTourenStore() //state nicht importierbar, da state nur intern des Stores verwaltet. 
+  // Statt dessen kann man funtkionen importieren, mit denen sich state manipulieren kässt.
+  updateTourListe() //Daten werden erst angezeig, wenn man ein update durchführt. 
   
   const tourid = computed(() => Number(route.params.tourid)) //route Params enthält die übergebenen Parameter(${tourid})
-  const tour = computed(() => tourenStore.tourdata.tourliste.find(t => t.id === tourid.value))
+  const tour = computed(() => tourdata.tourliste.find(t => t.id === tourid.value)) 
   
 if(tour.value && tour.value.entfernung > 300){ //ich muss erst mit tour.value prüfen, ob tour ein Objekt doer undefined zurückgibt, bevor ich auf entfernung zugreife
     setzeInfo("Die Entfernung beträgt über 300 km.")

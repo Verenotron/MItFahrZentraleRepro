@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-//import TourListe from './components/tour/TourenListe.vue'
-import TourenListeView from './views/TourenListeView.vue'
 import { useInfo } from './composables/useInfo.ts'
 import { RouterView } from 'vue-router'
 const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
+import { onMounted } from 'vue'
 
-//const info2 = ref('Dies ist eine Nachricht'); //ref() erzeugt reaktive Variablen(dh. man kann den Wert per UI ändern und Vue bemerkt das). Mit info.value kann man auf den String zugreifen.
+onMounted(() => loescheInfo())
+console.log("Komponente neu geladen.")
 
 </script>
 
@@ -16,7 +15,7 @@ const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufe
             <div class="div-header">
                 <a class="text" href="@{/benutzer}">Benutzer</a>
                 <a class="text" href="@{/ort}">Orte</a>
-                <RouterLink class="text" to="/touren">Touren</RouterLink>
+                <RouterLink class="text" to="/touren" @click="loescheInfo()">Touren</RouterLink>
             </div>
             <div class="div-header">
                 <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
@@ -30,21 +29,14 @@ const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufe
     </header>
 
     <div id="app">
-    <!-- <RouterView> RouterView zeigt die aktive Route an -->
 
         <div v-if="info" class="info-box">
         <div class="infobox-header">Obacht! <button @click="loescheInfo()" class="close-btn">x</button></div> 
         <div class="infobox-content">{{ info }}</div>
     </div>
-    <button @click="setzeInfo('Dies ist eine Nachricht.')">Hallo</button>
-        <RouterLink to="'/tour/${tourid}'">Beispiel-Tour</RouterLink>
-
-    <!-- <TourenListeView></TourenListeView> -->
-
+    <button @click="setzeInfo('Dies ist eine Nachricht.')">Hallo</button> <!-- @click ist eine kurzschreibweise für v-on:click-->
         <RouterView />
     </div>
-
-    
     
     <footer class="footer-content">
         <nav>
