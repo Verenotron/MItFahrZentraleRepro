@@ -1,10 +1,10 @@
 <template>
 
     <tr>
-        <td>{{tour.abfahrt}}</td>
-        <td>{{tour.von}}</td>
-        <td>{{tour.nach}}</td>
-        <td>{{tour.entfernung}}</td>
+        <td>{{tour.abfahrDateTime}}</td>
+        <td>{{tour.startOrtName}}</td>
+        <td>{{tour.zielOrtName}}</td>
+        <td>{{tour.distanz}}</td>
         <td>{{tour.plaetze}}</td>
         <td>{{frei}}</td>
         <td>{{tour.preis}}</td>

@@ -29,8 +29,8 @@ const FilteredTourenListe = computed(() => { // Computed wird verwendet, um reak
   }
 
   return tourenStore.tourdata.tourliste.filter(tour => {
-    const von = tour.von.toLowerCase()
-    const nach = tour.nach.toLowerCase()
+    const von = tour.startOrtName.toLowerCase()
+    const nach = tour.zielOrtName.toLowerCase()
     return von.includes(suchtext.value.toLowerCase()) || nach.includes(suchtext.value.toLowerCase())
   })
 })
