@@ -1,15 +1,19 @@
 package com.WebProjekt.MItfahrZentrale.entities.tour;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
+import com.WebProjekt.MItfahrZentrale.services.geo.GeoDistanz;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +22,9 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Tour {
+    
+    @Transient
+    GeoDistanz geoDistanz;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +55,39 @@ public class Tour {
     @ManyToOne
     private Ort zielOrt;
 
+    @ManyToMany//Macht Probleme, wenn das da nicht steht. 
+    private List<Benutzer> mitFahrgaeste;
+
 
     public Ort getZielOrt() {
         return zielOrt;
     }
+    public long getZielOrtId(){
+        return this.zielOrt.getId();
+    }
+    public long getStartOrtId(){
+        return this.startOrt.getId();
+    }
+    public String getStartOrtName(){
+        return this.startOrt.getName();
+    }
+    public String getZielOrtName(){
+        return this.zielOrt.getName();
+    }
+    public String getAnbieterName(){
+        return this.anbieter.getName();
+    }
+    public long getAnbieterId(){
+        return this.anbieter.getId();
+    }
+    public List<Benutzer> getMitfahrGaeste(){
+        return this.mitFahrgaeste;
+    }
+
+    public double getDistanz(){
+        return GeoDistanz.calculateDistance(startOrt.getGeobreite(), startOrt.getGeolaenge(), zielOrt.getGeobreite(), zielOrt.getGeolaenge());
+    }
+
     public void setZielOrt(Ort zielOrt) {
         this.zielOrt = zielOrt;
     }

@@ -2,6 +2,8 @@ package com.WebProjekt.MItfahrZentrale.services.tour;
 
 import java.time.LocalDateTime;
 
+import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
+
 public record TourDTD (
     long id,
     LocalDateTime abfahrDateTime,
@@ -16,5 +18,23 @@ public record TourDTD (
     long anbieterId,
     double distanz,
     String info){
+
+    public static TourDTD fromTour(Tour t){
+        int buchungen = t.getMitfahrGaeste().size();
+        return new TourDTD(
+            t.getId(),
+            t.getAbfahrDateTime(),
+            t.getPreis(),
+            t.getPlaetze(),
+            buchungen,
+            t.getStartOrtName(),
+            t.getStartOrtId(),
+            t.getZielOrtName(),
+            t.getZielOrtId(),
+            t.getAnbieterName(),
+            t.getAnbieterId(),
+            t.getDistanz(),
+            t.getInfo());
+    }
     
 }
