@@ -17,6 +17,7 @@ import { useTourenStore } from '@/stores/tourenstore.ts'
 
 const tourenStore = useTourenStore() 
 tourenStore.updateTourListe() //daten werden erst abgerufen, wenn updateTourListe aufgerufen wird.
+tourenStore.startTourLiveUpdate()
 const suchtext = ref<string>('') //Generics können auch weggelassen werden
 
 function resetSuchtext(){

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import type { ITourDTD } from './ITourDTD'
+import { Client, type Message } from '@stomp/stompjs';
+import type { IFrontendNachrichtEvent } from '@/services/IFrontendNachrichtEvent';
 
 export const useTourenStore = defineStore('useTourenStore', { //Definiere store als tourenstore
     state: () => ({ //state enthält reaktive Daten, die innerhalb des Stores verwaltet werden.
@@ -8,7 +10,8 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
             tourliste: [] as Array<ITourDTD>
             // tourliste: [] as ITourDTD[],
             // ok: false
-        }
+        },
+        stompClient: null as Client | null 
     }),
     actions:{ //actions enthält Funktionen, die state manipulieren oder Daten ändern. (hier befüllt action tourliste mit Daten.)
         async updateTourListe(){
@@ -26,8 +29,35 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
             this.tourdata.ok = false
           }
 
-        }
-      
+        },
+        startTourLiveUpdate(){
+          if(this.stompClient){
+            console.log('STOMP-Client existiert bereits. Verbindung wird wiederverwendet.')
+            return;
+          }
+
+          this.stompClient = new Client({
+            brokerURL: 'ws://localhost:8080/stompbroker',
+          })
+          this.stompClient.activate(); //verbindung aufbauen
+
+          this.stompClient.onWebSocketError = ( event ) => {console.error("WebSocket Fehler: ---", event);};
+          this.stompClient.onStompError = (frame) => {console.error("STOMP Fehler: ", frame);};
+          this.stompClient.onConnect = (frame) => {
+            console.log('Verbunden mit STOMP-Server');
+            this.stompClient?.subscribe("/topic/tour", (message: Message)=> {
+              const nachricht: IFrontendNachrichtEvent = JSON.parse(message.body);
+              console.log('Empfangene Nachricht: ', message.body);
+              //if (nachricht.typ === "TOUR") {
+                this.updateTourListe(); // Updatet die Tour-Liste bei einer TOUR-Nachricht
+            //}
+            });
+          };
+          this.stompClient.onDisconnect = () => {  console.log('Verbindung getrennt');};
+          //this.stompClient.activate(); //muss weg bleiben, hatte die ganze zeit versucht doppelt auf port 8080 zuzugreifen!!!!!
+          
+        },
+
       // updateTourListe(){
         //     this.tourdata.tourliste = [
         //       { 

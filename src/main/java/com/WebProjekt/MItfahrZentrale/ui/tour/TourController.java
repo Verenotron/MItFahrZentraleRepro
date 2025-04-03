@@ -18,6 +18,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
 import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
+import com.WebProjekt.MItfahrZentrale.messaging.FrontendNachrichtEvent;
+import com.WebProjekt.MItfahrZentrale.messaging.FrontendNachrichtEvent.Action;
+import com.WebProjekt.MItfahrZentrale.messaging.FrontendNachrichtEvent.Typ;
+import com.WebProjekt.MItfahrZentrale.messaging.FrontendNachrichtServiceImpl;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 import com.WebProjekt.MItfahrZentrale.services.ort.OrtServiceImpl;
 import com.WebProjekt.MItfahrZentrale.services.tour.TourServiceImpl;
@@ -35,6 +39,8 @@ public class TourController {
     @Autowired OrtServiceImpl ortService;
     @Autowired BenutzerServiceImpl benutzerService;
 
+    @Autowired FrontendNachrichtServiceImpl nachrichtenService;
+
     @ModelAttribute("tourformular")
     public TourFormular initTourFormular(){
         return new TourFormular();
@@ -49,6 +55,9 @@ public class TourController {
             model.addAttribute("info", e.getMessage());
             logger.error(e.getMessage());
         }
+
+        FrontendNachrichtEvent event = new FrontendNachrichtEvent(Typ.TOUR, n, Action.DELETE);
+        nachrichtenService.sendEvent(event);
 
         return "redirect:/tour";
     }
@@ -70,6 +79,8 @@ public class TourController {
         if(tourFormular.getId() == 0){
             try{
                 tour = tourService.speichereTour(tour);
+                FrontendNachrichtEvent event = new FrontendNachrichtEvent(Typ.TOUR, tour.getId(), Action.CREATE);
+                nachrichtenService.sendEvent(event);
             }catch(Exception e){
                 logger.error(e.getMessage());
                 model.addAttribute("info", e.getMessage());
