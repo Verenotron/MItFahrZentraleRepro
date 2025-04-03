@@ -74,7 +74,7 @@ public class OrtController {
     }
 
     @GetMapping("/ort/{n}/del")
-    public String loescheOrt(@PathVariable int n,
+    public String loescheOrt(@PathVariable("n") int n,
                                 RedirectAttributes redirectAttribute, //Attribut bleibt nur für nächste Anfrage verfügbar.
                                 Model model){
         try{
@@ -107,7 +107,7 @@ public class OrtController {
 
     @GetMapping("/ort/{n}")
     public String getOrt(@ModelAttribute("ortFormular") OrtFormular ortFormular,
-                        @PathVariable int n,
+                        @PathVariable("n") int n,
                         Model model){
         
         try{

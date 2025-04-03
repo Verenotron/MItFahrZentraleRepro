@@ -16,7 +16,7 @@ export default defineConfig({
     },
   },
   server: {
-      proxy: {'’/api': 'http://localhost:8080', //proxy ist ein Vermittler von Anfragen. (Vite ist localhost:3000)
+      proxy: {'/api': 'http://localhost:8080', //proxy ist ein Vermittler von Anfragen. (Vite ist localhost:3000)
         //alle Anfragen/URLs, die mit /api beginnen, werden vom Vite-Entwicklungsserver an localhost:8080/api weitergeleitet.
       '/stompbroker': { //Ähnlich wie proxy, jedoch eine Websocket-Verbindung. Anfragen vom Stompbroker werden an Server unter localhost:8080 weitergeleitet, aber sie verwenden das Websocket-Protokoll.
       target: 'http://localhost:8080/', ws: true //ws : true ->

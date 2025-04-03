@@ -136,7 +136,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
     @GetMapping("/benutzer/{n}") //RequestHandler Methode
     public String getBenutzerID(@ModelAttribute("benutzerFormular") BenutzerFormular benutzerFormular, //benutzerFormular als Modelattribut hinzugrfügt. Muss nicht mehr manuell gemacht werden die z.B. maxwunsch
                                 @ModelAttribute("benutzer") Benutzer benutzer,
-                                @PathVariable int n,
+                                @PathVariable("n") int n,
                                 Locale locale,
                                 Model model) {
 

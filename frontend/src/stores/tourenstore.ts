@@ -6,90 +6,77 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
         tourdata: { //tourdata ist reaktives Objekt, das ok und tourliste bereitstellt. Soblad sich ok und tourListe ändern, ändert sich tourdata ud damit die UI
             ok: true,
             tourliste: [] as Array<ITourDTD>
+            // tourliste: [] as ITourDTD[],
+            // ok: false
         }
     }),
     actions:{ //actions enthält Funktionen, die state manipulieren oder Daten ändern. (hier befüllt action tourliste mit Daten.)
-        updateTourListe(){
-            // this.tourdata.tourliste = [
-            //     { 
-            //       id: 1, 
-            //       abfahrt: '2025-04-10 08:00', 
-            //       von: 'Berlin', 
-            //       nach: 'München', 
-            //       entfernung: 585, 
-            //       plaetze: 20, 
-            //       buchungen: 15,
-            //       preis: 29
-            //     },
-            //     { 
-            //       id: 2, 
-            //       abfahrt: '2025-04-11 09:30', 
-            //       von: 'Hamburg', 
-            //       nach: 'Köln', 
-            //       entfernung: 360, 
-            //       plaetze: 25, 
-            //       buchungen: 10, 
-            //       preis: 35 
-            //     },
-            //     { 
-            //       id: 3, 
-            //       abfahrt: '2025-04-12 07:45', 
-            //       von: 'Frankfurt', 
-            //       nach: 'Stuttgart', 
-            //       entfernung: 210, 
-            //       plaetze: 18, 
-            //       buchungen: 5, 
-            //       preis: 22 
-            //     }
-            //   ]
-            this.tourdata.tourliste = [
-              { 
-                id: 1, 
-                abfahrDateTime: '2025-04-10T08:00', 
-                preis: 29, 
-                plaetze: 20, 
-                buchungen: 15, 
-                startOrtName: 'Berlin', 
-                startOrtId: 101, 
-                zielOrtName: 'München', 
-                zielOrtId: 102, 
-                anbieterName: 'Anbieter A', 
-                anbieterId: 1001, 
-                distanz: 585, 
-                info: 'Keine Info'
-              },
-              { 
-                id: 2, 
-                abfahrDateTime: '2025-04-11T09:30', 
-                preis: 35, 
-                plaetze: 25, 
-                buchungen: 10, 
-                startOrtName: 'Hamburg', 
-                startOrtId: 201, 
-                zielOrtName: 'Köln', 
-                zielOrtId: 202, 
-                anbieterName: 'Anbieter B', 
-                anbieterId: 1002, 
-                distanz: 360, 
-                info: 'Keine Info'
-              },
-              { 
-                id: 3, 
-                abfahrDateTime: '2025-04-12T07:45', 
-                preis: 22, 
-                plaetze: 18, 
-                buchungen: 5, 
-                startOrtName: 'Frankfurt', 
-                startOrtId: 301, 
-                zielOrtName: 'Stuttgart', 
-                zielOrtId: 302, 
-                anbieterName: 'Anbieter C', 
-                anbieterId: 1003, 
-                distanz: 210, 
-                info: 'Keine Info'
-              }
-            ]
-            
+        async updateTourListe(){
+
+          try{
+            const response = await fetch('http://localhost:8080/api/tour')
+            if(!response.ok){
+              throw new Error('Fehler beim Laden der Tourdaten')
+            }
+            const data: ITourDTD[] = await response.json()
+            this.tourdata.tourliste = data
+            this.tourdata.ok = true
+          }catch(error){
+            console.error('Fehler beim Abrufen der Tourdaten', error)
+            this.tourdata.ok = false
+          }
+
         }
+      
+      // updateTourListe(){
+        //     this.tourdata.tourliste = [
+        //       { 
+        //         id: 1, 
+        //         abfahrDateTime: '2025-04-10T08:00', 
+        //         preis: 29, 
+        //         plaetze: 20, 
+        //         buchungen: 15, 
+        //         startOrtName: 'Berlin', 
+        //         startOrtId: 101, 
+        //         zielOrtName: 'München', 
+        //         zielOrtId: 102, 
+        //         anbieterName: 'Anbieter A', 
+        //         anbieterId: 1001, 
+        //         distanz: 585, 
+        //         info: 'Keine Info'
+        //       },
+        //       { 
+        //         id: 2, 
+        //         abfahrDateTime: '2025-04-11T09:30', 
+        //         preis: 35, 
+        //         plaetze: 25, 
+        //         buchungen: 10, 
+        //         startOrtName: 'Hamburg', 
+        //         startOrtId: 201, 
+        //         zielOrtName: 'Köln', 
+        //         zielOrtId: 202, 
+        //         anbieterName: 'Anbieter B', 
+        //         anbieterId: 1002, 
+        //         distanz: 360, 
+        //         info: 'Keine Info'
+        //       },
+        //       { 
+        //         id: 3, 
+        //         abfahrDateTime: '2025-04-12T07:45', 
+        //         preis: 22, 
+        //         plaetze: 18, 
+        //         buchungen: 5, 
+        //         startOrtName: 'Frankfurt', 
+        //         startOrtId: 301, 
+        //         zielOrtName: 'Stuttgart', 
+        //         zielOrtId: 302, 
+        //         anbieterName: 'Anbieter C', 
+        //         anbieterId: 1003, 
+        //         distanz: 210, 
+        //         info: 'Keine Info'
+        //       }
+        //     ]
+            
+        // }
     }
 })
