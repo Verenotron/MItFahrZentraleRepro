@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import type { ITourDTD } from './ITourDTD'
 import { Client, type Message } from '@stomp/stompjs';
 import type { IFrontendNachrichtEvent } from '@/services/IFrontendNachrichtEvent';
+import { useInfo } from './../composables/useInfo.ts'
 
 export const useTourenStore = defineStore('useTourenStore', { //Definiere store als tourenstore
     state: () => ({ //state enthält reaktive Daten, die innerhalb des Stores verwaltet werden.
@@ -40,8 +41,8 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
             brokerURL: 'ws://localhost:8080/stompbroker',
           })
           this.stompClient.activate(); //verbindung aufbauen
-
-          this.stompClient.onWebSocketError = ( event ) => {console.error("WebSocket Fehler: ---", event);};
+          const{ setzeInfo, loescheInfo } = useInfo()
+          this.stompClient.onWebSocketError = ( event ) => {console.error("WebSocket Fehler:", event); setzeInfo("Backend kann nciht erreicht werden.")};
           this.stompClient.onStompError = (frame) => {console.error("STOMP Fehler: ", frame);};
           this.stompClient.onConnect = (frame) => {
             console.log('Verbunden mit STOMP-Server');
@@ -53,6 +54,7 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
             //}
             });
           };
+          loescheInfo()
           this.stompClient.onDisconnect = () => {  console.log('Verbindung getrennt');};
           //this.stompClient.activate(); //muss weg bleiben, hatte die ganze zeit versucht doppelt auf port 8080 zuzugreifen!!!!!
           

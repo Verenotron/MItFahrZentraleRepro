@@ -6,6 +6,7 @@
         <td>{{tour.zielOrtName}}</td>
         <td>{{tour.distanz}}</td>
         <td>{{tour.plaetze}}</td>
+        <td>{{tour.buchungen}}</td>
         <td>{{frei}}</td>
         <td>{{tour.preis}}</td>
         <td class="noBorderElement"> 

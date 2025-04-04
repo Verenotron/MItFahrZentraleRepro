@@ -12,7 +12,7 @@ import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 import com.WebProjekt.MItfahrZentrale.services.tour.TourDTD;
 import com.WebProjekt.MItfahrZentrale.services.tour.TourServiceImpl;
 
-@CrossOrigin(origins = "http://localhost:5173") //Wird benötigt, damit CORS Probleme nicht auftreten
+@CrossOrigin(origins = {"http://localhost:5173", "http//localhost:8080"}) //Wird benötigt, damit CORS Probleme nicht auftreten
 @RestController
 public class TourApiController {
 

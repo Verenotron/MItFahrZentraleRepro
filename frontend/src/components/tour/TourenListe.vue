@@ -10,6 +10,7 @@
                 <th>nach</th>
                 <th>Entfernung</th>
                 <th>Plätze</th>
+                <th>buchungen</th>
                 <th>Frei</th>
                 <th>Preis</th>
             </tr>
