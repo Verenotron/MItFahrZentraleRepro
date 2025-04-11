@@ -48,6 +48,11 @@ public class TourController {
         return new TourFormular();
     }
 
+    @GetMapping("")
+    public String rufeTourenListeauf(){
+        return "redirect:/admin/tour";
+    }
+
     @GetMapping("/tour/{n}/del")
     public String loescheTour(@PathVariable int n, Model model){
 
