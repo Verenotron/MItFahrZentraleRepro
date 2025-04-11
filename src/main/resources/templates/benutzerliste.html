@@ -24,12 +24,12 @@
                 <td th:text="${benutzer.id}"></td>
                 <td th:replace="~{fragments/benutzer-zeile :: feldausgeben(benutzerid=${benutzer.id}, feldname=namensfeld, wert=${benutzer.name})}"></td>
                 <td th:replace="~{fragments/benutzer-zeile :: feldausgeben(benutzerid=${benutzer.id}, feldname=emailfeld, wert=${benutzer.eMail})}"></td>
-                <td th:text="${benutzer.geburtstag}" hx-get="/hx/benutzerID"></td>
+                <td th:text="${benutzer.geburtstag}" hx-get="/admin/hx/benutzerID"></td>
                 <td>
-                    <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button>
+                    <button type="button" th:attr="onclick='window.location.href=\'/admin/benutzer/' + ${benutzer.id} + '\''" th:text="#{benutzerliste.eintrag.bearbeiten}"></button>
                 </td>
                 <td>
-                    <button type="button" th:attr="onclick='window.location.href=\'/benutzer/' + ${benutzer.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button>
+                    <button type="button" th:attr="onclick='window.location.href=\'/admin/benutzer/' + ${benutzer.id} + '/del\''" th:text="#{benutzerliste.eintrag.loeschen}"></button>
                     <!-- th:attr wird gebraucht, weil hier der Wert dynamisch zusammengesetzt wird und komplexe Zeichen wie "" und '' maskiert werden sollen.
                     th:onklick geht nur bei einfacheren und weniger komplexen werten
                     \ Backslash (auch am ende des Strings!!!) maskiert das '', damit es als Zeichen und nicht als Begrenzung der Zeichenkette interpretiert wird.-->
@@ -40,7 +40,7 @@
     </div>
 
     <th>
-        <button th:attr="onclick='window.location.href=\'/benutzer/0\''" th:text="#{benutzerliste.neu}"></button>
+        <button th:attr="onclick='window.location.href=\'/admin/benutzer/0\''" th:text="#{benutzerliste.neu}"></button>
     </th>
 
     <footer>

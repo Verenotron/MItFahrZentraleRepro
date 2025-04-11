@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -26,6 +27,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("benutzerFormular") // listet Model-Attribute, die (transparent) in Session gespeichert werden sollen. Nutzung wie gewohnt per @ModelAttribute. 
+@RequestMapping("/admin")
 public class BenutzerController {// Wird über mehrere Requests automatisch wieder ins Model geladen.
 
     private static final Logger logger = LoggerFactory.getLogger(BenutzerController.class); //mit .class erhalte ich den Typ des Objektes, nicht die Instanz
@@ -82,7 +84,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         model.addAttribute("benutzerID", benutzer.getId());
         benutzerFormular.passwort = "";
 
-        return "redirect:/benutzer/" + benutzer.getId(); //nach dem post auf andern Pfad geleitet
+        return "redirect:/admin/benutzer/" + benutzer.getId(); //nach dem post auf andern Pfad geleitet
         
         
     }

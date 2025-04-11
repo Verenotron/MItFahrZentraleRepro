@@ -18,7 +18,7 @@
         <h1 th:if="${ortID} == 0" th:text="#{ortformular.titel.neu}"></h1>
         <h1 th:if="${ortID} != 0" th:text="#{ortformular.titel(${ortID})}"></h1>
 
-        <form th:action="@{/submitOrt}" method="post">
+        <form th:action="@{/admin/submitOrt}" method="post">
 
             <div style="padding-left: 30px; padding-right: 50px;">
                 <label style="width: 100%; " for="ortname" th:text="#{ort.name}"></label><br>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +24,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("ortFormular")
+@RequestMapping("/admin")
 public class OrtController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrtController.class);
@@ -70,7 +72,7 @@ public class OrtController {
         model.addAttribute("ortFormular", ortFormular);
         model.addAttribute("ortID", ort.getId());
         
-        return "redirect:/ort/" + ort.getId();
+        return "redirect:/admin/ort/" + ort.getId();
     }
 
     @GetMapping("/ort/{n}/del")
@@ -83,7 +85,7 @@ public class OrtController {
             redirectAttribute.addFlashAttribute("info", "Ort wird für eine Tour benötigt.");
             logger.error(e.getMessage());
         }
-        return "redirect:/ort";
+        return "redirect:/admin/ort";
     }
 
 

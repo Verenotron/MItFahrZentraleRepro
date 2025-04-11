@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -30,7 +31,8 @@ import jakarta.validation.Valid;
 
 
 @Controller
-@SessionAttributes("tourformular") 
+@SessionAttributes("tourformular")
+@RequestMapping("/admin")
 public class TourController {
 
     Logger logger = LoggerFactory.getLogger(TourController.class);
@@ -59,7 +61,7 @@ public class TourController {
         FrontendNachrichtEvent event = new FrontendNachrichtEvent(Typ.TOUR, n, Action.DELETE);
         nachrichtenService.sendEvent(event);
 
-        return "redirect:/tour";
+        return "redirect:/admin/tour";
     }
 
     @GetMapping("/validiere")
@@ -127,7 +129,7 @@ public class TourController {
             logger.error(e.getMessage());
         }
 
-        return "redirect:/validiere";
+        return "redirect:/admin/validiere";
     }
 
     @GetMapping("/tour")

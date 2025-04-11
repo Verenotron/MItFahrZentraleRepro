@@ -16,7 +16,7 @@
     <h1 th:if="${tourID} == 0" th:text="#{tourformular.titel.neu}"></h1>
     <h1 th:if="${tourID} != 0" th:text="#{tourformular.titel(${tourID})}"></h1>
 
-    <form th:action="@{/submitTour}" method="post">
+    <form th:action="@{/admin/submitTour}" method="post">
 
         <label for="anbieter" th:text="#{tourliste.colhead.anbieter}"></label><br>
         <select th:field="*{tourformular.anbieterId}" name="anbieterId" id="anbieter" th:classappend="${#fields.hasErrors('tourformular.anbieter')} ? 'error-border' : ''">

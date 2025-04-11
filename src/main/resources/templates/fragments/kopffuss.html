@@ -8,9 +8,9 @@
     <header th:fragment="kopf">
         <nav class="header-content">
             <div class="div-header">
-                <a class="text" th:href="@{/benutzer}" th:text="#{kopf.benutzer}"></a>
-                <a class="text" th:href="@{/ort}" th:text="#{kopf.orte}"></a>
-                <a class="text" th:href="@{/tour}" th:text="#{kopf.touren}"></a>
+                <a class="text" th:href="@{/admin/benutzer}" th:text="#{kopf.benutzer}"></a>
+                <a class="text" th:href="@{/admin/ort}" th:text="#{kopf.orte}"></a>
+                <a class="text" th:href="@{/admin/tour}" th:text="#{kopf.touren}"></a>
             </div>
             <div class="div-header">
                 <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>

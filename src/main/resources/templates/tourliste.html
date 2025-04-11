@@ -4,34 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1 th:text="#{tourliste.titel}"></h1>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th th:text="#{tourliste.colhead.Abfahrtzeitpunkt}"></th>
-            <th th:text="#{tourliste.colhead.preis}"></th>
-            <th th:text="#{tourliste.colhead.plaetze}"></th>
-            <th th:text="#{tourliste.colhead.startort}"></th>
-            <th th:text="#{tourliste.colhead.zielort}"></th>
-            <th th:text="#{tourliste.colhead.anbieter}"></th>
-        </tr>
-        <tr th:each="element : ${alleTouren}">
-            <th th:text="${element.id}"></th>
-            <th th:text="${element.abfahrDateTime}"></th>
-            <th th:text="${element.preis}"></th>
-            <th th:text="${element.plaetze}"></th>
-            <th th:text="${element.startOrt.name}"></th>
-            <th th:text="${element.zielOrt.name}"></th>
-            <th th:text="${element.anbieter.name}"></th>
-            <th><button type="button" th:attr="onclick='window.location.href=\'/tour/' + ${element.id} + '\''" th:text="#{tourliste.eintrag.bearbeiten}"></button></th>
-            <th><button type="button" th:attr="onclick='window.location.href=\'/tour/' + ${element.id} + '/del\''" th:text="#{tourliste.eintrag.loeschen}"></button></th>
-        </tr>
-    </table>
+    <header>
+        <div th:replace="fragments/kopffuss :: kopf"></div>
+    </header>
 
-    <button th:text="#{tourliste.neu}" th:attr="onclick='window.location.href=\'/tour/0\''"></button>
+    <div class="main-content">
+        <h1 th:text="#{tourliste.titel}"></h1>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th th:text="#{tourliste.colhead.Abfahrtzeitpunkt}"></th>
+                <th th:text="#{tourliste.colhead.preis}"></th>
+                <th th:text="#{tourliste.colhead.plaetze}"></th>
+                <th th:text="#{tourliste.colhead.startort}"></th>
+                <th th:text="#{tourliste.colhead.zielort}"></th>
+                <th th:text="#{tourliste.colhead.anbieter}"></th>
+            </tr>
+            <tr th:each="element : ${alleTouren}">
+                <th th:text="${element.id}"></th>
+                <th th:text="${element.abfahrDateTime}"></th>
+                <th th:text="${element.preis}"></th>
+                <th th:text="${element.plaetze}"></th>
+                <th th:text="${element.startOrt.name}"></th>
+                <th th:text="${element.zielOrt.name}"></th>
+                <th th:text="${element.anbieter.name}"></th>
+                <th><button type="button" th:attr="onclick='window.location.href=\'/admin/tour/' + ${element.id} + '\''" th:text="#{tourliste.eintrag.bearbeiten}"></button></th>
+                <th><button type="button" th:attr="onclick='window.location.href=\'/admin/tour/' + ${element.id} + '/del\''" th:text="#{tourliste.eintrag.loeschen}"></button></th>
+            </tr>
+        </table>
+    </div>
+
+    <button th:text="#{tourliste.neu}" th:attr="onclick='window.location.href=\'/admin/tour/0\''"></button>
+
+    <footer>
+        <div th:replace="fragments/kopffuss :: fuss"></div>
+    </footer>
     
 </body>
 </html>

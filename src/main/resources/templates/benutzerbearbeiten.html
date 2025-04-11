@@ -25,7 +25,7 @@
             <h1 th:if="!${titel}" th:text="#{benutzerformular.titel(${benutzerID})}"></h1> <!-- Platzhalter {0} aus der .properties Datei wird mit benutzerID ersetzt-->
             <h1 th:if="${titel}" th:text="#{benutzerformular.titel.neu}"></h1>
 
-            <form th:action="@{/submit}" method="post">
+            <form th:action="@{/admin/submit}" method="post">
 
             <label for="name" th:text="#{benutzer.name}"></label><br> <!-- for Attribut gibt die id des dazugehörigen input feldes an, da die beiden zusammengehören-->
             <input type="text" name="name" th:value="${benutzerFormular.name}" th:classappend="${#fields.hasErrors('benutzerFormular.name')} ? 'error-border' : ''"><br> <!-- name wichtig, damit Spring die Werte an das Zugehörige Java-Datenobjekt binden kann-->
