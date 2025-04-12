@@ -13,8 +13,8 @@ console.log("Komponente neu geladen.")
    <header class="kopf">
         <nav class="header-content">
             <div class="div-header">
-                <a class="text" href="@{/benutzer}">Benutzer</a>
-                <a class="text" href="@{/ort}">Orte</a>
+                <!-- <a class="text" href="@{/benutzer}">Benutzer</a>
+                <a class="text" href="@{/ort}">Orte</a> -->
                 <RouterLink class="text" to="/touren" @click="loescheInfo()">Touren</RouterLink>
             </div>
             <div class="div-header">
