@@ -40,11 +40,23 @@ public class BenutzerServiceImpl implements BenutzerService{
         benutzerRepository.deleteById(id);
     }
 
+    // public Optional<Benutzer> findeBenutzer(String email){
+    //     List<Benutzer> alleBenutzer = this.holeAlleBenutzer();
+    //     for(Benutzer benutzer : alleBenutzer){
+    //         if(benutzer.geteMail().equals(email)){
+    //             return Optional.of(benutzer); //Damit ich einen Optional zurückgebe
+    //         }
+    //     }
+    //     return Optional.empty();
+    // }
+
     public Benutzer aktualisiereBenutzer(Benutzer b){ // Aktualisiert vorhandenen Benutzer
         return benutzerRepository.findById(b.getId()).map(existingUser -> {
             existingUser.setName(b.getName());
             existingUser.seteMail(b.geteMail());
             existingUser.setGeburtstag(b.getGeburtstag());
+            existingUser.setMag(b.getMag());
+            existingUser.setMagNicht(b.getMagNicht());
             if(b.getPasswort() != null && !b.getPasswort().isEmpty()){  //Falls PasswortString leer ist, wird altes Passwort übernommen. Kann man auch anders machen siehe Blatt4 S.4+5
                 existingUser.setPasswort(b.getPasswort());
             }

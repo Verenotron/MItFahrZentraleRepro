@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
 
     @Autowired private BenutzerServiceImpl benutzerService;//DependencyInjection, Instanziierung und initialisierung
     //Autowired weist Spring an automatisch die passende Bean zur Verfügung zu stellen
+    @Autowired PasswordEncoder passwordEncoder;
 
     @ModelAttribute("benutzerFormular") //Wird vor jedem Handler aufruf aufgerufen. Initialisiert das Attribut, falls es nicht existiert.
     public BenutzerFormular initBenutzer(){ //Der Rückgabewert wird im Model und Session(@SessionAttributes) unter "benutzer" hinzugefügt.
@@ -58,6 +60,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         //model.addAttribute("sprache", locale.getDisplayLanguage());
 
         Benutzer benutzer = new Benutzer();
+        benutzerFormular.setPasswort(passwordEncoder.encode(benutzerFormular.getPasswort()));//Passwort wirv verschlüsselt
         benutzerFormular.toBenutzer(benutzer);
 
         if(benutzerFormular.getId() == 0 && benutzerFormular.getPasswort().isEmpty()){ 
@@ -77,6 +80,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         }
 
         if (result.hasErrors()){ //falls result.reject aufgerufen ist das hier true
+            benutzerFormular.setPasswort("");
             return "benutzerbearbeiten";
         }
         
@@ -117,7 +121,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
     @GetMapping("/benutzer/{n}/del")
     public String loescheBenutzer(@PathVariable int n){ 
         benutzerService.loescheBenutzerMitId(n);
-        return "redirect:/benutzer";
+        return "redirect:/admin/benutzer";
     }
 
     @GetMapping("/benutzer/0")

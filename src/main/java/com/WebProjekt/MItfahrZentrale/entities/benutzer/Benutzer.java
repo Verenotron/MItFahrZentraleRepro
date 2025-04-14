@@ -12,6 +12,7 @@ import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 import com.WebProjekt.MItfahrZentrale.validators.Passwort;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,9 +42,10 @@ public class Benutzer {
     
     @Size(min=5, max=80, message="{fehler.benutzer.email.size}")
     @Email(message="{fehler.benutzer.email.emailformat}")
+    @Column(unique=true) //Damit eine e-mail nur einmal vergeben wird.
     private String eMail;
 
-    @Passwort(value = "17", value2 = "siebzehn", message="{gutespasswort.fehler}")
+    @NotBlank
     private String passwort;
     
     @NotNull(message="Geburtstag muss existieren.")
