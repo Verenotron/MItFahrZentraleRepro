@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.BenutzerRepository;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class BenutzerServiceImpl implements BenutzerService{
 

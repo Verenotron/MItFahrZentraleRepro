@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
@@ -54,7 +56,14 @@ public class TourController {
     }
 
     @GetMapping("/tour/{n}/del")
-    public String loescheTour(@PathVariable int n, Model model){
+    public String loescheTour(@PathVariable int n, RedirectAttributes redirectAttributes, Model model){
+
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        Tour tour = tourService.holeTourMitId(n).orElseThrow(() -> new RuntimeException("Tour konnte nicht geladen werden."));
+        if(!auth.getName().equals(tour.getAnbieter().geteMail())){
+            redirectAttributes.addFlashAttribute("info", "Tour darf nur vom Anbieter gelöscht werden.");
+            return "redirect:/admin/tour";
+        }
 
         try{
             tourService.loescheTourMitId(n);

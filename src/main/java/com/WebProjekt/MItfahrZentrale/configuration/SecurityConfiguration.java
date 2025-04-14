@@ -34,7 +34,7 @@ public class SecurityConfiguration {
         .requestMatchers(HttpMethod.GET, "/assets/*").permitAll() //Anfragen über Http-Get auf assets sind für jeden erlaubt. Also bilder etc.
         .requestMatchers("/admin/ort/*", "/help").hasRole("CHEF")
         .requestMatchers("/admin/*").authenticated()
-        .requestMatchers("/h2-console/**").permitAll()
+        //.requestMatchers("/h2-console/**").permitAll() //nur für entwicklung nötig
         .anyRequest().permitAll() ) //egal welche Anfrage, jeder kann zugreifen.
         .formLogin(form -> form.defaultSuccessUrl("/admin", true)) //hier wird man standardmäßig nach erfolgreichem login hinnavigiert
         //.logout(out -> out.logoutSuccessUrl("/info"));

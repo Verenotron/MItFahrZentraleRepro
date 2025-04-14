@@ -1,8 +1,10 @@
 package com.WebProjekt.MItfahrZentrale.ui.benutzer;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 
@@ -91,6 +94,19 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
         return "redirect:/admin/benutzer/" + benutzer.getId(); //nach dem post auf andern Pfad geleitet
         
         
+    }
+
+    @PostConstruct
+    public void init() {
+        if (benutzerService.holeAlleBenutzer().size() == 0) {
+            Benutzer admin = new Benutzer();
+            admin.setName("ADMIN");
+            admin.seteMail("admin@example.com");
+            admin.setPasswort(passwordEncoder.encode("admin123"));
+            admin.setGeburtstag(LocalDate.of(2022,04,13));
+            admin.setMag(Set.of("MACHT"));
+            benutzerService.speichereBenutzer(admin);
+        }
     }
 
     @GetMapping("/submit") //brauchen wir nur für den Sprachen wechsel, wenn ich erst auf submit und dann die sprache wechseln will
