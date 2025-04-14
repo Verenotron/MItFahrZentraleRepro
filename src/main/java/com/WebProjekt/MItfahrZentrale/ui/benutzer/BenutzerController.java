@@ -9,6 +9,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.services.benutzer.BenutzerServiceImpl;
@@ -106,6 +108,12 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
             admin.setGeburtstag(LocalDate.of(2022,04,13));
             admin.setMag(Set.of("MACHT"));
             benutzerService.speichereBenutzer(admin);
+        }else{
+            List<Benutzer> alleBenutzer = benutzerService.holeAlleBenutzer();
+            for(Benutzer b : alleBenutzer){
+                System.out.println("Benutzer: " + b.getName() + b.geteMail() + b.getPasswort());
+            }
+
         }
     }
 
@@ -135,7 +143,13 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
     }
 
     @GetMapping("/benutzer/{n}/del")
-    public String loescheBenutzer(@PathVariable int n){ 
+    public String loescheBenutzer(@PathVariable int n, RedirectAttributes redirectAttributes){ 
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        Benutzer benutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer konnte nicht gefunden werden."));
+        if(!auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CHEF"))){ //authName ist benutzerMail --- auch in den anderen controllern vielleicht beachten
+            redirectAttributes.addFlashAttribute("info", "Nur der CHEF kann löschen");
+            return "redirect:/admin/benutzer";
+        }
         benutzerService.loescheBenutzerMitId(n);
         return "redirect:/admin/benutzer";
     }

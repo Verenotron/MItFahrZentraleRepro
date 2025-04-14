@@ -42,16 +42,6 @@ public class BenutzerServiceImpl implements BenutzerService{
         benutzerRepository.deleteById(id);
     }
 
-    // public Optional<Benutzer> findeBenutzer(String email){
-    //     List<Benutzer> alleBenutzer = this.holeAlleBenutzer();
-    //     for(Benutzer benutzer : alleBenutzer){
-    //         if(benutzer.geteMail().equals(email)){
-    //             return Optional.of(benutzer); //Damit ich einen Optional zurückgebe
-    //         }
-    //     }
-    //     return Optional.empty();
-    // }
-
     public Benutzer aktualisiereBenutzer(Benutzer b){ // Aktualisiert vorhandenen Benutzer
         return benutzerRepository.findById(b.getId()).map(existingUser -> {
             existingUser.setName(b.getName());
