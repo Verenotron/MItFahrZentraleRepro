@@ -65,8 +65,9 @@ public class SecurityConfiguration {
         .securityMatchers(s -> s.requestMatchers("/api/**","/stompbroker"))
         .authorizeHttpRequests(authz -> authz
         // Zugang zu /api/token und (hier) STOMP-Endpunkt offen
-        .requestMatchers(HttpMethod.POST, "/api/token").permitAll()
-        .requestMatchers(HttpMethod.OPTIONS, "/api/token").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() //OPTIONS prüft, ob eine Anfrage erlaubt ist(CORD-Vorabfragen vom Browser)
         .requestMatchers("/stompbroker").permitAll()
         // Zugriff auf sonstige /api-Endpunkte nur authentifiziert
         .requestMatchers("/api/**").authenticated()
@@ -83,7 +84,7 @@ public class SecurityConfiguration {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
+        CorsConfiguration config = new CorsConfiguration(); //Erlaubt CORS Abfragen von überall, für alle Methoden und Header. Wichtig für mein Frontend.
         config.setAllowedOrigins(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
