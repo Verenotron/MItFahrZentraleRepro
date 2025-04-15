@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //import HomeView from '../views/HomeView.vue'
 import TourenListeView from './../views/TourenListeView.vue'
 import TourView from './../views/TourView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const routes = [
   {
@@ -17,6 +18,12 @@ const routes = [
     path: '/tour/:tourid',
     name: 'TourView',
     component: TourView,
+    props: true
+  },
+  {
+    path: '/login',
+    name: 'LoginView',
+    component: LoginView,
     props: true
   }
 ]

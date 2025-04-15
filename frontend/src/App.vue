@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import { useInfo } from './composables/useInfo.ts'
-import { RouterView } from 'vue-router'
-const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
-import { onMounted } from 'vue'
-
-onMounted(() => loescheInfo())
-console.log("Komponente neu geladen.")
-
-</script>
-
 <template>
    <header class="kopf">
         <nav class="header-content">
@@ -22,8 +11,8 @@ console.log("Komponente neu geladen.")
                 <a class="text" href="@{?sprache=de}">DE</a>
                 <a class="text" href="@{?sprache=en}">EN</a>
                 <a class="text" href="@{?sprache=nl}">NL</a>
-            </div>            
-            
+                <button @click="userLogout()">Logout</button>  
+            </div>      
         </nav>
         
     </header>
@@ -43,8 +32,31 @@ console.log("Komponente neu geladen.")
             <a class="text" href="#">Imressum</a>
             <a class="text" href="#">Kontakt</a>
         </nav>
+
+        <p>{{ loginState.username }}</p>
     </footer>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useLogin } from '@/composables/useLogin.ts'
+import { useInfo } from './composables/useInfo.ts'
+import { RouterView } from 'vue-router'
+import { onMounted } from 'vue'
+
+const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
+onMounted(() => loescheInfo())
+console.log("Komponente neu geladen.")
+
+const { loginState, login, logout } = useLogin();
+const router = useRouter();
+
+function userLogout(){
+    logout()
+    router.push("/login")
+}
+
+</script>
 
 <style scoped>
 @import './assets/style.css';

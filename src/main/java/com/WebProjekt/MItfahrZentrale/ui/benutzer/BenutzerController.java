@@ -146,7 +146,7 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
     public String loescheBenutzer(@PathVariable int n, RedirectAttributes redirectAttributes){ 
         var auth = SecurityContextHolder.getContext().getAuthentication();
         Benutzer benutzer = benutzerService.holeBenutzerMitId(n).orElseThrow(() -> new RuntimeException("Benutzer konnte nicht gefunden werden."));
-        if(!auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CHEF"))){ //authName ist benutzerMail --- auch in den anderen controllern vielleicht beachten
+        if(!auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CHEF"))){ //authName ist benutzerMail --- auch in den anderen controllern vielleicht beachten auch dass Chef bearbeiten darf
             redirectAttributes.addFlashAttribute("info", "Nur der CHEF kann löschen");
             return "redirect:/admin/benutzer";
         }
