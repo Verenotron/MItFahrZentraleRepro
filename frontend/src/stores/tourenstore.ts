@@ -3,6 +3,9 @@ import type { ITourDTD } from './ITourDTD'
 import { Client, type Message } from '@stomp/stompjs';
 import type { IFrontendNachrichtEvent } from '@/services/IFrontendNachrichtEvent';
 import { useInfo } from './../composables/useInfo.ts'
+import { useLogin } from '@/composables/useLogin.ts'
+
+const { loginState } = useLogin()
 
 export const useTourenStore = defineStore('useTourenStore', { //Definiere store als tourenstore
     state: () => ({ //state enthält reaktive Daten, die innerhalb des Stores verwaltet werden.
@@ -18,7 +21,7 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
         async updateTourListe(){
 
           try{
-            const response = await fetch('http://localhost:8080/api/tour')
+            const response = await fetch('http://localhost:8080/api/tour', {headers: {'Authorization' : `Bearer ${loginState.jwt}`}})
             if(!response.ok){
               throw new Error('Fehler beim Laden der Tourdaten')
             }

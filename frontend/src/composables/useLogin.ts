@@ -3,7 +3,7 @@ import { useInfo } from './useInfo.ts'
 
 const { setzeInfo, loescheInfo } = useInfo();
 
-const loginState = reactive({
+export const loginState = reactive({
     username : '',
     loggedIn : false,
     jwt : ''

@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import TourenListeView from './../views/TourenListeView.vue'
 import TourView from './../views/TourView.vue'
 import LoginView from '@/views/LoginView.vue'
+import { useLogin } from '@/composables/useLogin.ts'
+
+const{ loginState } = useLogin()
 
 const routes = [
   {
@@ -31,6 +34,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes, //Darf nicht leer sein
+})
+
+router.beforeEach((to, from, next) => {
+  if(!loginState.loggedIn && to.path !== '/login'){
+    next('/login')
+  }else{
+    next()
+  }
 })
 
 export default router
