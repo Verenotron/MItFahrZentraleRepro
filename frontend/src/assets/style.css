@@ -17,6 +17,15 @@ html, body{
     border: none;
 }
 
+.belegt{
+    background-color: red;
+    color: red;
+}
+.frei{
+    background-color: green;
+    color: green;
+}
+
 table{
     border-collapse: collapse; /* Damit die borders zwischen den einzelnen td und th nicht gestückelt sind.*/
 }

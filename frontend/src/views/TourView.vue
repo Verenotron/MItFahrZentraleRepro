@@ -1,11 +1,17 @@
 <template>
     <div>
-      <h1>Tour Details</h1>
+      <h1 v-if="tour">Tour {{ tour.id }} : {{ tour.startOrtName }} -> {{ tour.zielOrtName }}</h1>
+
+      <p v-if="tour">{{ tour.info || 'Keine zusätzliche Info verfügbar' }} </p>
+      <p v-if="tour">Du fährst mit {{tour.anbieterName}}.</p>
+
       <p v-if="tour">Von: {{ tour.startOrtName }} -> {{ tour.zielOrtName }} ({{tour.distanz.toFixed(0)}} km)</p>
-      <p v-if="tour">Du fährst mit: {{tour.anbieterName}}</p>
       <p v-if="tour">Preis: {{ tour.preis }} €</p>
       <p v-if="tour">Plaetze: {{tour.plaetze}} davon gebucht: {{tour.buchungen}}, also frei: {{frei}}</p>
-      <p v-if="tour">Info: {{ tour.info || 'Keine zusätzliche Info verfügbar' }} </p>
+      <!-- <div v-if="tour" v-for="n in tour.plaetze" :key="n">
+        <div :class="n <= tour.buchungen ? 'belegt' : 'frei'">{{ n }}</div>
+      </div> -->
+
       <p v-if="!tour">Tour nicht gefunden.</p>
     </div>
   </template>

@@ -17,7 +17,7 @@
                 <a class="text" th:href="@{?sprache=de}">DE</a>
                 <a class="text" th:href="@{?sprache=en}">EN</a>
                 <a class="text" th:href="@{?sprache=nl}">NL</a>
-                <a th:href="@{/logout}">logout</a>
+                <a th:href="@{/logout}">Logout</a>
             </div>            
             
         </nav>
@@ -27,11 +27,13 @@
     </header>
 
     <footer th:fragment="fuss" class="footer-content">
-        <nav>
+        <div>
             <a class="text" href="#" th:text="#{fuss.impressum}"></a>
             <a class="text" href="#" th:text="#{fuss.kontakt}"></a>
+        </div>
+        <div>
             <p th:text="${username}"></p>
-        </nav>
+        </div>
     </footer>
 
 </body>

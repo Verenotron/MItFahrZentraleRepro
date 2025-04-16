@@ -7,7 +7,7 @@
                 <RouterLink class="text" to="/touren" @click="loescheInfo()">Touren</RouterLink>
             </div>
             <div class="div-header">
-                <a class="text" href="${sprache}'" th:text="#{sprachen} + ' : '"></a>
+                <a class="text" href="${sprache}'">Sprachen: </a>
                 <a class="text" href="@{?sprache=de}">DE</a>
                 <a class="text" href="@{?sprache=en}">EN</a>
                 <a class="text" href="@{?sprache=nl}">NL</a>
@@ -23,7 +23,7 @@
         <div class="infobox-header">Obacht! <button @click="loescheInfo()" class="close-btn">x</button></div> 
         <div class="infobox-content">{{ info }}</div>
     </div>
-    <button @click="setzeInfo('Dies ist eine Nachricht.')">Hallo</button> <!-- @click ist eine kurzschreibweise für v-on:click-->
+    <!-- <button @click="setzeInfo('Dies ist eine Nachricht.')">Hallo</button> @click ist eine kurzschreibweise für v-on:click -->
         <RouterView />
     </div>
     

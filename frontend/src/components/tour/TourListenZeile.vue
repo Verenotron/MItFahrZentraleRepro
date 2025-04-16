@@ -8,7 +8,7 @@
         <td>{{tour.plaetze}}</td>
         <td>{{tour.buchungen}}</td>
         <td>{{frei}}</td>
-        <td>{{tour.preis}}</td>
+        <td>{{tour.preis}} Є</td>
         <td class="noBorderElement"> 
         <button v-on:click="details">Details</button>
         </td>
