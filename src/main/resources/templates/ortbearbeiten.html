@@ -13,16 +13,16 @@
         <div th:replace="fragments/kopffuss :: kopf"></div>
     </header>
 
-    <div class="main-content">
+    <div style="margin-left: 30px;">
 
         <h1 th:if="${ortID} == 0" th:text="#{ortformular.titel.neu}"></h1>
         <h1 th:if="${ortID} != 0" th:text="#{ortformular.titel(${ortID})}"></h1>
 
         <form th:action="@{/admin/submitOrt}" method="post">
 
-            <div style="padding-left: 30px; padding-right: 50px;">
-                <label style="width: 100%; " for="ortname" th:text="#{ort.name}"></label><br>
-                <input style="width: 100%;" type="text" name="name" th:value="${ortFormular.name}" th:classappend="${#fields.hasErrors('ortFormular.name')} ? 'error-border' : ''"><br> <!-- muss name gleich dem Namen des Formularattributs entsprehen??? Post methode wurde nach anpassung aufgerufen-->
+            <div style="padding-right: 50px;">
+                <label for="ortname" th:text="#{ort.name}"></label><br>
+                <input style="width: 400px;" type="text" name="name" th:value="${ortFormular.name}" th:classappend="${#fields.hasErrors('ortFormular.name')} ? 'error-border' : ''"><br> <!-- muss name gleich dem Namen des Formularattributs entsprehen??? Post methode wurde nach anpassung aufgerufen-->
                 <div th:if="${#fields.hasErrors('ortFormular.name')}" th:errors="*{ortFormular.name}" class="error-text"></div>
             </div>
 
@@ -40,6 +40,7 @@
                     </th>
                 </td>
             </table>
+            <p>Bei Nichteingabe der Koordinaten werden diese berechnet.</p>
 
             <button type="submit">OK</button> <!-- type ist standardmäßig submit-->
         </form>
