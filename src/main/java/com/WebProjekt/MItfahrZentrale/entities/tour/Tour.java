@@ -1,6 +1,7 @@
 package com.WebProjekt.MItfahrZentrale.entities.tour;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
@@ -40,6 +41,8 @@ public class Tour {
 
     @Min(1)
     private int plaetze;
+
+    private int buchungen;
     
     @Size(max=400)
     private String info;
@@ -59,6 +62,14 @@ public class Tour {
     private List<Benutzer> mitFahrgaeste;
 
 
+    public boolean buche(){
+        if(buchungen == plaetze){
+            return false;
+        }else{
+            buchungen += 1;
+            return true;
+        }
+    }
     public Ort getZielOrt() {
         return zielOrt;
     }
@@ -80,9 +91,9 @@ public class Tour {
     public long getAnbieterId(){
         return this.anbieter.getId();
     }
-    public List<Benutzer> getMitfahrGaeste(){
-        return this.mitFahrgaeste;
-    }
+    // public List<Benutzer> getMitfahrGaeste(){
+    //     return this.mitFahrgaeste;
+    // }
 
     public double getDistanz(){
         return GeoDistanz.calculateDistance(startOrt.getGeobreite(), startOrt.getGeolaenge(), zielOrt.getGeobreite(), zielOrt.getGeolaenge());
@@ -133,7 +144,29 @@ public class Tour {
     public void setInfo(String info) {
         this.info = info;
     }
-
+    public int getBuchungen() {
+        return buchungen;
+    }
+    public void setBuchungen(int buchungen) {
+        this.buchungen = buchungen;
+    }
+    public List<Benutzer> getMitFahrgaeste() {
+        return mitFahrgaeste;
+    }
+    public void setMitFahrgaeste(List<Benutzer> mitFahrgaeste) {
+        this.mitFahrgaeste = mitFahrgaeste;
+    }
+    public List<String> getMitFahrGastNamen(){
+        List<String> namen = new ArrayList<>();
+        for(Benutzer benutzer: mitFahrgaeste){
+            namen.add(benutzer.getName());
+        }
+        return namen;
+    }
+    public void addMitFahrGast(Benutzer benutzer){
+        this.mitFahrgaeste.add(benutzer);
+    }
+    
     
     
 }

@@ -1,6 +1,7 @@
 package com.WebProjekt.MItfahrZentrale.ui.tour;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.ort.Ort;
@@ -25,6 +26,8 @@ public class TourFormular {
 
     @Min(1)
     private int plaetze;
+
+    private int buchungen;
     
     @Size(max = 400)
     private String info;
@@ -41,6 +44,8 @@ public class TourFormular {
     @NotNull
     private Ort zielOrt;
 
+    private List<Benutzer> mitFahrGaeste;
+
     private long startOrtId;
     private long zielOrtId; //Später wieder rausnehmen, falls es eine bessere Lösung gibt? 
     private long anbieterId;
@@ -49,6 +54,7 @@ public class TourFormular {
         tour.setId(this.id);
         tour.setAbfahrDateTime(this.abfahrDateTime);
         tour.setPreis(this.preis);
+        tour.setBuchungen(this.buchungen);
         tour.setPlaetze(this.plaetze);
         tour.setInfo(this.info);
         tour.setStartOrt(this.startOrt);
@@ -60,6 +66,7 @@ public class TourFormular {
         this.id = tour.getId();
         this.abfahrDateTime = tour.getAbfahrDateTime();
         this.preis = tour.getPreis();
+        this.buchungen = tour.getBuchungen();
         this.plaetze = tour.getPlaetze();
         this.info = tour.getInfo();
         this.startOrt = tour.getStartOrt();
@@ -163,6 +170,26 @@ public class TourFormular {
 
     public void setAnbieterId(long anbieterId) {
         this.anbieterId = anbieterId;
+    }
+
+    public int getBuchungen() {
+        return buchungen;
+    }
+
+    public void setBuchungen(int buchungen) {
+        this.buchungen = buchungen;
+    }
+
+    public List<Benutzer> getMitFahrGaeste() {
+        return mitFahrGaeste;
+    }
+
+    public void setMitFahrGaeste(List<Benutzer> mitFahrGaeste) {
+        this.mitFahrGaeste = mitFahrGaeste;
+    }
+
+    public void addGast(Benutzer gast){
+        this.mitFahrGaeste.add(gast);
     }
     
 }

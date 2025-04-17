@@ -26,7 +26,7 @@ public class AuthTokenService {
         var ablauf = jetzt.plusHours(1);
         // "Claims" (Token-Nutzdaten) zusammenstellen
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-        .subject("MyApp-Token")
+        .subject(username)
         .issuer("http://www.joghurta-software.xy")
         .issueTime(Date.from(jetzt.toInstant(ZoneOffset.UTC)))
         .expirationTime(Date.from(ablauf.toInstant(ZoneOffset.UTC)))

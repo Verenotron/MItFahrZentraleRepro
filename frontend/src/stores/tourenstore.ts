@@ -6,6 +6,7 @@ import { useInfo } from './../composables/useInfo.ts'
 import { useLogin } from '@/composables/useLogin.ts'
 
 const { loginState } = useLogin()
+const {setzeInfo} = useInfo()
 
 export const useTourenStore = defineStore('useTourenStore', { //Definiere store als tourenstore
     state: () => ({ //state enthält reaktive Daten, die innerhalb des Stores verwaltet werden.
@@ -45,7 +46,7 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
           })
           this.stompClient.activate(); //verbindung aufbauen
           const{ setzeInfo, loescheInfo } = useInfo()
-          this.stompClient.onWebSocketError = ( event ) => {console.error("WebSocket Fehler:", event); setzeInfo("Backend kann nciht erreicht werden.")};
+          this.stompClient.onWebSocketError = ( event ) => {console.error("WebSocket Fehler:", event); setzeInfo("Backend kann nicht erreicht werden.")};
           this.stompClient.onStompError = (frame) => {console.error("STOMP Fehler: ", frame);};
           this.stompClient.onConnect = (frame) => {
             console.log('Verbunden mit STOMP-Server');
@@ -62,6 +63,26 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
           //this.stompClient.activate(); //muss weg bleiben, hatte die ganze zeit versucht doppelt auf port 8080 zuzugreifen!!!!!
           
         },
+        async tourBuchen(tourDTD : ITourDTD){
+
+          const token = loginState.jwt
+
+          const response = await fetch('http://localhost:8080/api/validiere', {
+              method: 'POST',
+              headers: {'Content-Type' : 'application/json', 'Authorization' : `Bearer ${loginState.jwt}`}, 
+              redirect: 'error',
+              body : JSON.stringify(tourDTD)
+          })
+
+          if(!response.ok){
+              throw new Error("Buchen fehlgeschlagen")
+          }
+      
+          setzeInfo(await response.text())
+          this.updateTourListe()
+      
+      }
+
 
       // updateTourListe(){
         //     this.tourdata.tourliste = [

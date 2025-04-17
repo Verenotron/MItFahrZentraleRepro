@@ -138,6 +138,7 @@ public class TourController {
             tourFormular.setStartOrt(startOrt);
             tourFormular.setZielOrt(zielOrt);
             tourFormular.setAnbieter(benutzer);
+            tourFormular.setBuchungen(0);
         }catch(Exception e){
             model.addAttribute("info", e.getMessage());
             logger.error(e.getMessage());

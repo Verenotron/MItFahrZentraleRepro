@@ -12,4 +12,5 @@ export interface ITourDTD{
     anbieterId: number 
     distanz: number
     info: String
+    mitFahrGaesteNamen: string[]
 }

@@ -39,13 +39,15 @@ public class TourServiceImpl implements TourService{
         tourRepository.deleteById(id);
     }
 
-    public Tour aktualisiereOrt(Tour t){
+    public Tour aktualisiereTour(Tour t){
         return tourRepository.findById(t.getId()).map(existingTour -> {
             existingTour.setStartOrt(t.getZielOrt());
             existingTour.setStartOrt(t.getStartOrt());
             existingTour.setAnbieter(t.getAnbieter());
             existingTour.setPreis(t.getPreis());
             existingTour.setPlaetze(t.getPlaetze());
+            existingTour.setBuchungen(t.getBuchungen());
+            existingTour.setMitFahrgaeste(t.getMitFahrgaeste());
             existingTour.setInfo(t.getInfo());
             return tourRepository.save(existingTour); 
         })

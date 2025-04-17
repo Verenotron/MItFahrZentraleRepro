@@ -113,7 +113,6 @@ public class BenutzerController {// Wird über mehrere Requests automatisch wied
             for(Benutzer b : alleBenutzer){
                 System.out.println("Benutzer: " + b.getName() + b.geteMail() + b.getPasswort());
             }
-
         }
     }
 
