@@ -1,0 +1,26 @@
+de,en,nl
+kontakt:Kontakt,Contact,Contact
+impressum:Impressum,Imprint,Impressum
+sprachen:Sprachen,Languages,Talen
+tour:Tour,Tour,Rondreize
+touren:Touren,Tours,Rondreizen
+abmelden:Abmelden,Logout,Afmelden
+zuruecksetzen:Zurücksetzen,Reset,Resetten
+ortSuche:Such nach Ziel- oder Startort,Search for destination or starting point,Zoek naar bestemming of vertrekpunt
+angebot:Das aktuelle Mitfahrangebot,The current carpool offer,Het huidige carpoolaanbod
+abfahrt:Abfahrt,Departure,Vertrek
+von:Von,From,Van
+nach:Nach,To,Naar
+entfernung:Entfernung,Distance,Afstand
+plaetze:Plätze,Seats,Zitplaatsen
+buchungen:Buchungen,Bookings,Boekingen
+frei:Frei,Available,Beschikbaar
+preis:Preis,Price,Prijs
+keineInfo:Keine zusätzliche Info verfügbar,No additional info available,Geen extra informatie beschikbaar
+duFaehrstMit:Du fährst mit,You are riding with,Je rijdt met
+davonGebucht:davon gebucht,booked,geboekt
+alsoFrei:also frei,available,beschikbaar
+gebuchtVon:Gebucht von,Booked by,Boek door
+entfernen:Entfernen,Remove,Verwijderen
+tourNichtGefunden:Tour nicht gefunden,Tour not found,Tour niet gevonden
+buchen:Buchen,Book,Boeken

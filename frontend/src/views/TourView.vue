@@ -1,30 +1,30 @@
 <template>
     <div style="display: flex; justify-content: space-between;">
       <div>
-      <h1 v-if="tour">Tour {{ tour.id }} : {{ tour.startOrtName }} -> {{ tour.zielOrtName }}</h1>
+      <h1 v-if="tour">{{ $t('tour')}} {{ tour.id }} : {{ tour.startOrtName }} -> {{ tour.zielOrtName }}</h1>
 
-      <p v-if="tour">{{ tour.info || 'Keine zusätzliche Info verfügbar' }} </p>
-      <p v-if="tour">Du fährst mit {{tour.anbieterName}}.</p>
+      <p v-if="tour">{{ tour.info || $t('tour') }} </p>
+      <p v-if="tour">{{ $t('duFaehrstMit') }} {{tour.anbieterName}}.</p>
 
-      <p v-if="tour">Von: {{ tour.startOrtName }} -> {{ tour.zielOrtName }} ({{tour.distanz.toFixed(0)}} km)</p>
-      <p v-if="tour">Preis: {{ tour.preis }} €</p>
-      <p v-if="tour">Plaetze: {{tour.plaetze}} davon gebucht: {{tour.buchungen}}, also frei: {{frei}}</p>
+      <p v-if="tour">{{ $t('von') }}: {{ tour.startOrtName }} -> {{ tour.zielOrtName }} ({{tour.distanz.toFixed(0)}} km)</p>
+      <p v-if="tour">{{ $t('preis') }}: {{ tour.preis }} €</p>
+      <p v-if="tour">{{ $t('plaetze') }}: {{tour.plaetze}} {{ $t('davonGebucht') }}: {{tour.buchungen}}, {{ $t('alsoFrei') }}: {{frei}}</p>
 
     </div>
     <div style="padding-right: 20em;">
-      <p>Gebucht von:</p>
+      <p>{{ $t('gebuchtVon') }}:</p>
 
       <div v-if="tour" v-for="name in tour.mitFahrGaesteNamen" :key="name">
         <p>{{ name }}</p>
       </div>
-      <button v-if="tour" @click="entfernen(tour)">Entfernen</button>
+      <button v-if="tour" @click="entfernen(tour)">{{ $t('entfernen') }}</button>
       <!-- <div v-if="tour" v-for="n in tour.plaetze" :key="n">
         <div :class="n <= tour.buchungen ? 'belegt' : 'frei'">{{ n }}</div>
       </div> -->
     </div>
     </div>
-    <p v-if="!tour">Tour nicht gefunden.</p>
-      <button v-if="tour" @click="buchen(tour)">Buchen</button>
+    <p v-if="!tour">{{ $t('tourNichtGefunden') }}.</p>
+      <button v-if="tour" @click="buchen(tour)">{{ $t('buchen') }}</button>
   </template>
   
   <script setup lang="ts">

@@ -4,14 +4,14 @@
             <div class="div-header">
                 <!-- <a class="text" href="@{/benutzer}">Benutzer</a>
                 <a class="text" href="@{/ort}">Orte</a> -->
-                <RouterLink class="text" to="/touren" @click="loescheInfo()">Touren</RouterLink>
+                <RouterLink class="text" to="/touren" @click="loescheInfo()">{{ $t('touren') }}</RouterLink>
             </div>
             <div class="div-header">
-                <a class="text" href="${sprache}'">Sprachen: </a>
-                <a class="text" href="@{?sprache=de}">DE</a>
-                <a class="text" href="@{?sprache=en}">EN</a>
-                <a class="text" href="@{?sprache=nl}">NL</a>
-                <button @click="userLogout()">Logout</button>  
+                <a class="text" href="${sprache}'">{{ $t('sprachen') }}: </a>
+                <button @click="sprachWechsel('de')">DE</button>
+                <button @click="sprachWechsel('en')">EN</button>
+                <button @click="sprachWechsel('nl')">NL</button>
+                <button @click="userLogout()">{{ $t('abmelden') }}</button>  
             </div>      
         </nav>
         
@@ -29,8 +29,8 @@
     
     <footer class="footer-content">
         <nav>
-            <a class="text" href="#">Imressum</a>
-            <a class="text" href="#">Kontakt</a>
+            <a class="text" href="#">{{ $t('impressum') }}</a>
+            <a class="text" href="#">{{ $t('kontakt') }}</a>
         </nav>
 
         <p>{{ loginState.username }}</p>
@@ -43,6 +43,8 @@ import { useLogin } from '@/composables/useLogin.ts'
 import { useInfo } from './composables/useInfo.ts'
 import { RouterView } from 'vue-router'
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
 
 const {info, loescheInfo, setzeInfo} = useInfo() //useInfo wird einmal aufgerufen und benötigte Teile werden extrahiert mit Destructing.
 onMounted(() => loescheInfo())
@@ -54,6 +56,10 @@ const router = useRouter();
 function userLogout(){
     logout()
     router.push("/login")
+}
+
+function sprachWechsel(sprache : string){
+    locale.value = sprache
 }
 
 </script>

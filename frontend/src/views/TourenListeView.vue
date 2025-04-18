@@ -1,8 +1,8 @@
 <template>
 
   <div>
-    <input type="text" placeholder="Such nach Ziel- oder Startort" v-model="suchtext"> <!-- v-model bindet den Wert einer Eingabe(input, textarea) an eine Variable-->
-    <button v-on:click="resetSuchtext()">reset</button>
+    <input type="text" :placeholder="$t('ortSuche')" v-model="suchtext"> <!-- v-model bindet den Wert einer Eingabe(input, textarea) an eine Variable-->
+    <button v-on:click="resetSuchtext()">{{ $t('zuruecksetzen') }}</button>
   </div>
 
   <TourenListe :touren="FilteredTourenListe"></TourenListe> <!-- :touren definiert ein Property, das :touren ist eine Kurzschreibweise für v-bind:touren -->

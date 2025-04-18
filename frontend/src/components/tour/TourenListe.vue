@@ -1,18 +1,18 @@
 <template>
-<h1>Das aktuelle Mitfahrangebot</h1>
+<h1>{{ $t('angebot') }}</h1>
 
 <div class="main-content">
     <table>
         <thead>
             <tr>
-                <th>Abfahrt</th>
-                <th>von</th>
-                <th>nach</th>
-                <th>Entfernung</th>
-                <th>Plätze</th>
-                <th>Buchungen</th>
-                <th>Frei</th>
-                <th>Preis</th>
+                <th>{{ $t('abfahrt') }}</th>
+                <th>{{ $t('von') }}</th>
+                <th>{{ $t('nach') }}</th>
+                <th>{{ $t('entfernung') }}</th>
+                <th>{{ $t('plaetze') }}</th>
+                <th>{{ $t('buchungen') }}</th>
+                <th>{{ $t('frei') }}</th>
+                <th>{{ $t('preis') }}</th>
             </tr>
         </thead>
         <tbody>
