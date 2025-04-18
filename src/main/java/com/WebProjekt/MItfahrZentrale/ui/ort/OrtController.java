@@ -53,7 +53,13 @@ public class OrtController {
         if(ortFormular.getId() == 0){
             if(ortFormular.getGeobreite() == 0 && ortFormular.getGeolaenge() == 0){
                 List<Ort> vorgeschlageneOrteVonAPI = ortService.findeOrtsvorschlaegeFuerAdresse(ortFormular.getName());
-                ort = vorgeschlageneOrteVonAPI.get(0);
+                try{
+                    ort = vorgeschlageneOrteVonAPI.get(0);
+                }catch(IndexOutOfBoundsException e){
+                    model.addAttribute("info", "Es konnte kein Ort gefunden werden");
+                    return "ortbearbeiten";
+                }
+                
                 model.addAttribute("ortID", 0);
                 ortFormular.fromOrt(ort);
                 model.addAttribute("info", "Wichtig: Koordinaten bestätigen oder ändern.");
