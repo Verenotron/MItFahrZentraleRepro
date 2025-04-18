@@ -2,8 +2,6 @@ package com.WebProjekt.MItfahrZentrale.services.tour;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
 import com.WebProjekt.MItfahrZentrale.entities.tour.Tour;
 
 public record TourDTD (

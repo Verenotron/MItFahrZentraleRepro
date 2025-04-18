@@ -2,6 +2,7 @@ package com.WebProjekt.MItfahrZentrale.entities.tour;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.WebProjekt.MItfahrZentrale.entities.benutzer.Benutzer;
@@ -62,11 +63,12 @@ public class Tour {
     private List<Benutzer> mitFahrgaeste;
 
 
-    public boolean buche(){
+    public boolean buche(Benutzer benutzer){
         if(buchungen == plaetze){
             return false;
         }else{
             buchungen += 1;
+            this.mitFahrgaeste.add(benutzer);
             return true;
         }
     }
@@ -163,10 +165,22 @@ public class Tour {
         }
         return namen;
     }
-    public void addMitFahrGast(Benutzer benutzer){
-        this.mitFahrgaeste.add(benutzer);
+    // public void addMitFahrGast(Benutzer benutzer){
+    //     this.mitFahrgaeste.add(benutzer);
+    // }
+    public boolean removeMitFahrGast(Benutzer benutzer){
+        Iterator<Benutzer> it = this.mitFahrgaeste.iterator();
+        while(it.hasNext()){
+            if(it.next().getId() == benutzer.getId()){
+                it.remove();
+                this.buchungen -= 1;
+                return true;
+            }
+        }
+        return false;
+        
+        // return this.mitFahrgaeste.removeIf(obj -> obj.getId() == benutzer.getId());
     }
-    
     
     
 }

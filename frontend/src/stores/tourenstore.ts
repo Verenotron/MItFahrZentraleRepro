@@ -67,7 +67,7 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
 
           const token = loginState.jwt
 
-          const response = await fetch('http://localhost:8080/api/validiere', {
+          const response = await fetch('http://localhost:8080/api/buchen', {
               method: 'POST',
               headers: {'Content-Type' : 'application/json', 'Authorization' : `Bearer ${loginState.jwt}`}, 
               redirect: 'error',
@@ -81,6 +81,21 @@ export const useTourenStore = defineStore('useTourenStore', { //Definiere store 
           setzeInfo(await response.text())
           this.updateTourListe()
       
+      },
+      async nutzerAusTourEntfernen(tourDTD: ITourDTD){
+        const response = await fetch('http://localhost:8080/api/buchungEntfernen',{
+              method: 'POST',
+              headers: {'Content-Type' : 'application/json', 'Authorization' : `Bearer ${loginState.jwt}`}, 
+              redirect: 'error',
+              body : JSON.stringify(tourDTD)
+        })
+
+        if(!response.ok){
+          throw new Error("Buchungsentfernung fehlgeschlagen")
+        }
+
+        setzeInfo(await response.text())
+        this.updateTourListe();
       }
 
 

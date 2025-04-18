@@ -38,27 +38,8 @@ public class TourApiController {
         }
         return alleTourenDTD;
     }
-    @PostMapping("/api/buchen")
-    public void bucheTour(TourDTD tourDTD){
 
-        List<Tour> alleTouren = tourService.holeAlleTouren();
-        Tour gefundeneTour;
-        boolean gebucht;
-
-        for(Tour tour : alleTouren){
-            if(tour.getId() == tourDTD.id()){
-                gefundeneTour = tour;
-                if(gefundeneTour.buche()){
-
-                }
-            }
-        }
-
-    }
-
-    @PostMapping("/api/validiere")
-    public ResponseEntity<String> getMethodName(@RequestHeader("Authorization") String token,
-                                @RequestBody TourDTD tourDTD) {
+    private String validiere(String token){
 
         SignedJWT signedJWT;
         JWTClaimsSet claims;
@@ -71,6 +52,53 @@ public class TourApiController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        return usermail;
+
+    }
+
+    private Tour findeInTouren(TourDTD tourDTD){
+        List<Tour> alleTouren = tourService.holeAlleTouren();
+        for (Tour aktTour : alleTouren){
+            if(tourDTD.id() == aktTour.getId()){
+                return aktTour;
+            }
+        }
+        return null;
+    }
+    private Benutzer findeInBenutzer(String email){
+        List<Benutzer> alleBenutzer = benutzerService.holeAlleBenutzer();
+        for(Benutzer benutzer : alleBenutzer){
+            if(benutzer.geteMail().equals(email)){
+                return benutzer;
+            }
+        }
+        return null;
+    }
+
+    @PostMapping("api/buchungEntfernen")
+    public ResponseEntity<String> buchungEntfernen(@RequestHeader("Authorization") String token,
+                                @RequestBody TourDTD tourDTD){
+
+        String usermail = validiere(token);
+        Tour tour = findeInTouren(tourDTD);
+        Benutzer benutzer = findeInBenutzer(usermail);
+        if(tour.removeMitFahrGast(benutzer)){
+            tourService.aktualisiereTour(tour);
+            return ResponseEntity.ok("Benutzer konnte entfernt werden.");
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Benutzer nicht vorhanden.");
+        }
+
+        
+
+    }
+
+    @PostMapping("/api/buchen")
+    public ResponseEntity<String> getMethodName(@RequestHeader("Authorization") String token,
+                                @RequestBody TourDTD tourDTD) {
+
+        String usermail = validiere(token);
 
         List<Tour> alleTouren = tourService.holeAlleTouren();
         List<Benutzer> alleBenutzer = benutzerService.holeAlleBenutzer();
@@ -87,8 +115,8 @@ public class TourApiController {
         for(Tour tour : alleTouren){
             if(tour.getId() == tourDTD.id()){
                 gefundeneTour = tour;
-                if(gefundeneTour.buche()){
-                    gefundeneTour.addMitFahrGast(gefundenerBenutzer);
+                if(gefundeneTour.buche(gefundenerBenutzer)){
+                    //gefundeneTour.addMitFahrGast(gefundenerBenutzer);
                     tourService.aktualisiereTour(tour);
                 }else{
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tour bereits ausgebucht.");
